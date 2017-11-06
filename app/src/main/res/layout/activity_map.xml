@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.activity.MainActivity"
-    android:weightSum="1">
+    tools:context="com.activity.MapActivity">
 
     <com.view.ActionBarView
         android:id="@+id/action_bar"
@@ -14,38 +13,30 @@
         android:layout_height="@dimen/actionbar_height">
     </com.view.ActionBarView>
 
-
-
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
+    <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"></android.support.v4.view.ViewPager>
-
+        android:layout_weight="1">
+    </FrameLayout>
 
     <android.support.design.widget.TabLayout
-
         android:id="@+id/tablayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/actionbar_height"
-        android:background="@color/colorPrimary"
-        app:tabGravity="fill"
-        app:tabIndicatorColor="@android:color/holo_blue_light"
-        app:tabIndicatorHeight="2dp"
-        app:tabMode="fixed"
-        app:tabSelectedTextColor="@color/white"
-        app:tabTextColor="@color/white">
+        android:layout_height="@dimen/actionbar_height">
         <android.support.design.widget.TabItem
+            android:text="校园地图"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="主页"
-            />
+            android:layout_height="wrap_content">
+        </android.support.design.widget.TabItem>
+
         <android.support.design.widget.TabItem
+            android:text="百度地图"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="我的" />
+            android:layout_height="wrap_content">
+        </android.support.design.widget.TabItem>
     </android.support.design.widget.TabLayout>
+
 
 
 

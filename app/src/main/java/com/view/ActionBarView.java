@@ -30,9 +30,9 @@ public class ActionBarView extends LinearLayout {
         super(context, attrs);
 
         View view = View.inflate(context, R.layout.layout_action_bar,null);
-        back = view.findViewById(R.id.back);
-        more = view.findViewById(R.id.more);
-        title = view.findViewById(R.id.title);
+        back = (ImageButton) view.findViewById(R.id.back);
+        more = (ImageButton) view.findViewById(R.id.more);
+        title = (TextView) view.findViewById(R.id.title);
 
         addView(view);
     }

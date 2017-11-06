@@ -17,12 +17,13 @@
             </intent-filter>
         </activity>
         <activity android:name="com.activity.ClassroomActivity">
-
             <intent-filter>
-                <category android:name="android.intent.category.DEFAULT"></category>
-                <action android:name="com.activity.classroom"></action>
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <action android:name="com.activity.classroom" />
             </intent-filter>
         </activity>
+        <activity android:name="com.activity.MapActivity"></activity>
     </application>
 
 </manifest>
