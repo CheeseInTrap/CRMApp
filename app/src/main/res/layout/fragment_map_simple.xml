@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <com.view.ActionBarView
-        android:id="@+id/action_bar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.fragment.SimpleMapFragment">
+    <WebView
+        android:id="@+id/web_view"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/actionbar_height">
-    </com.view.ActionBarView>
-
-    <ImageView
-        android:id="@+id/image"
-        android:padding="@dimen/group_padding"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+    </WebView>
 
 </LinearLayout>
