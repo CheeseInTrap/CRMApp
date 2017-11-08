@@ -23,7 +23,9 @@
                 <action android:name="com.activity.classroom" />
             </intent-filter>
         </activity>
-        <activity android:name="com.activity.MapActivity"></activity>
+        <activity android:name="com.activity.MapActivity" />
+        <activity android:name="com.activity.EntryActivity" />
+        <activity android:name="com.activity.LoginActivity"></activity>
     </application>
 
 </manifest>

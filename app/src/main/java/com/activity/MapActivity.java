@@ -1,45 +1,45 @@
 package com.activity;
 
-import android.support.annotation.IdRes;
+
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import com.example.user.crmapp.R;
 import com.fragment.BaiduMapFragment;
 import com.fragment.SimpleMapFragment;
 import com.util.ToastUtil;
 import com.view.ActionBarView;
+import com.view.noScrollViewPager;
 
-import java.io.FileDescriptor;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MapActivity extends AppCompatActivity {
 
     private ActionBarView actionBarView;
-    private FrameLayout frameLayout;
     private TabLayout tabLayout;
+    private noScrollViewPager viewPager;
 
+
+    public static final String[] titles = new String[]{"校园地图","百度地图"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
         initActionBarView();
+        initView();
 
     }
 
 
     private void initView(){
-        frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
         tabLayout = (TabLayout) findViewById(R.id.tablayout);
+        viewPager = (noScrollViewPager) findViewById(R.id.view_pager);
 
         final List<Fragment> fragments = new ArrayList<>();
         fragments.add(new SimpleMapFragment());
@@ -47,11 +47,31 @@ public class MapActivity extends AppCompatActivity {
 
 
 
+        viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public android.support.v4.app.Fragment getItem(int position) {
+                return fragments.get(position);
+            }
+
+            @Override
+            public int getCount() {
+                return fragments.size();
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return titles[position];
+            }
+        });
+        tabLayout.setupWithViewPager(viewPager);
 
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+
+                int i = tab.getPosition();
+                viewPager.setCurrentItem(i,false);
 
             }
 

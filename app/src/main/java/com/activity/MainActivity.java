@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         tabLayout.setupWithViewPager(viewPager);
+
         final List<Fragment> fragments = new ArrayList<>();
         fragments.add(new MainFragment());
         fragments.add(new MyInfoFragment());

@@ -13,17 +13,24 @@
         android:layout_height="@dimen/actionbar_height">
     </com.view.ActionBarView>
 
-    <FrameLayout
-        android:id="@+id/frameLayout"
+    <com.view.noScrollViewPager
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-    </FrameLayout>
+    </com.view.noScrollViewPager>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tablayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/actionbar_height">
+        android:layout_height="@dimen/actionbar_height"
+        android:background="@color/colorPrimary"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@android:color/holo_blue_light"
+        app:tabIndicatorHeight="2dp"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="@color/white">
         <android.support.design.widget.TabItem
             android:text="校园地图"
             android:layout_width="wrap_content"
