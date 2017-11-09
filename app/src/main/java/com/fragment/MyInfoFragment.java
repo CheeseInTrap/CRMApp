@@ -1,12 +1,15 @@
 package com.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.activity.LoginActivity;
 import com.example.user.crmapp.R;
 
 /**
@@ -16,12 +19,18 @@ import com.example.user.crmapp.R;
 
 public class MyInfoFragment extends Fragment{
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_info_my,container,false);
+        view.findViewById(R.id.btnLoginAty).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentLogin=new Intent(getActivity(),LoginActivity.class);
+                startActivity(intentLogin);
 
+            }
+        });
 
         return view;
     }

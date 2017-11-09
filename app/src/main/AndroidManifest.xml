@@ -25,7 +25,9 @@
         </activity>
         <activity android:name="com.activity.MapActivity" />
         <activity android:name="com.activity.EntryActivity" />
-        <activity android:name="com.activity.LoginActivity"></activity>
+        <activity android:name="com.activity.LoginActivity">
+        </activity>
+        <activity android:name="com.activity.RegisterActivity"/>
     </application>
 
 </manifest>
