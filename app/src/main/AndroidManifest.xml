@@ -2,6 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.user.crmapp">
 
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,10 +37,21 @@
             </intent-filter>
         </activity>
         <activity android:name="com.activity.MapActivity" />
+<<<<<<< HEAD
         <activity android:name="com.activity.EntryActivity" />
         <activity android:name="com.activity.LoginActivity">
         </activity>
         <activity android:name="com.activity.RegisterActivity"/>
+=======
+        <activity android:name="com.activity.EntryActivity">
+
+        </activity>
+        <activity android:name="com.activity.LoginActivity"></activity>
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="O11fbB7GSH6ieHpcobOtrZdTD2XG9Zsi"/>
+>>>>>>> 1648521eea0ff67588385995cf7210c9a58be2d2
     </application>
 
 </manifest>

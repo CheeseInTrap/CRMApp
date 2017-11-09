@@ -16,7 +16,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.user.crmapp.R;
+
 //登录页面Aty
+
+import com.util.db.MySQLiteHelper;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -24,7 +28,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         TextView tvRegister=(TextView)findViewById(R.id.tvStartRegister);
         String registerquery="没有账号？点击注册";
         SpannableString spStr = new SpannableString(registerquery);
@@ -39,5 +42,8 @@ public class LoginActivity extends AppCompatActivity {
         spStr.setSpan(clickSpan, 0, registerquery.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         tvRegister.setText(spStr);
         tvRegister.setMovementMethod(LinkMovementMethod.getInstance());//设置超链接为可点击状态
+        MySQLiteHelper helper = new MySQLiteHelper(this,"userInfo",null,1);
+
+
     }
 }
