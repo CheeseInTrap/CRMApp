@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -22,6 +23,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="O11fbB7GSH6ieHpcobOtrZdTD2XG9Zsi"/>
         <activity android:name="com.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,21 +42,17 @@
             </intent-filter>
         </activity>
         <activity android:name="com.activity.MapActivity" />
-<<<<<<< HEAD
-        <activity android:name="com.activity.EntryActivity" />
-        <activity android:name="com.activity.LoginActivity">
-        </activity>
-        <activity android:name="com.activity.RegisterActivity"/>
-=======
         <activity android:name="com.activity.EntryActivity">
 
         </activity>
         <activity android:name="com.activity.LoginActivity"></activity>
 
-        <meta-data
-            android:name="com.baidu.lbsapi.API_KEY"
-            android:value="O11fbB7GSH6ieHpcobOtrZdTD2XG9Zsi"/>
->>>>>>> 1648521eea0ff67588385995cf7210c9a58be2d2
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:permission="android.permission.BAIDU_LOCATION_SERVICE"
+            android:process=":remote" />
     </application>
 
 </manifest>

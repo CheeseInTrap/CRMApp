@@ -15,7 +15,7 @@ public class EntryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entry);
-
+        SDKInitializer.initialize(getApplicationContext());
 
         String username = PreferenceUtil.getData(this,"loginInfo","username");
         if (username == null){
