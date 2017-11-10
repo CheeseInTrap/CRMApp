@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 
+import com.activity.CRQueryActivity;
+import com.activity.CRReserveActivity;
 import com.activity.MapActivity;
 import com.model.Constant;
 import com.section.Section;
@@ -55,10 +57,14 @@ public class MainFragment extends BaseSectionFragment {
                                         MainFragment.this.onDestroy();
                                         break;
                                     case "教室查询":
-
+                                        Intent intent2 = new Intent(getActivity(), CRQueryActivity.class);
+                                        startActivity(intent2);
+                                        MainFragment.this.onDestroy();
                                         break;
                                     case "教室预约":
-
+                                        Intent intent3 = new Intent(getActivity(), CRReserveActivity.class);
+                                        startActivity(intent3);
+                                        MainFragment.this.onDestroy();
                                         break;
                                     case "教室推荐":
 

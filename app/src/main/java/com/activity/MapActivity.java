@@ -94,14 +94,19 @@ public class MapActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                ToastUtil.showToast(MapActivity.this,"back");
+                finish();
             }
         });
         actionBarView.setOnMoreClick(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.showToast(MapActivity.this,"more");
+                onResume();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }
