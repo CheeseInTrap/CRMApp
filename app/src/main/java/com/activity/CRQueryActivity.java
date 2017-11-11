@@ -1,5 +1,8 @@
 package com.activity;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -16,11 +19,13 @@ import android.widget.TextView;
 
 import com.example.user.crmapp.R;
 import com.model.ClassRoom;
+import com.model.Constant;
 import com.util.ToastUtil;
 import com.util.db.MySQLiteHelper;
 import com.view.ActionBarView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class CRQueryActivity extends AppCompatActivity {
 
@@ -45,6 +50,10 @@ public class CRQueryActivity extends AppCompatActivity {
 
 
         MySQLiteHelper helper = new MySQLiteHelper(this);
+        SQLiteDatabase reader = helper.getReadableDatabase();
+
+
+        //Cursor c = reader.query()
 
 
         rvCR = (RecyclerView) findViewById(R.id.rv_classroom);

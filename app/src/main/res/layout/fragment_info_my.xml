@@ -5,29 +5,5 @@
     android:layout_height="match_parent"
     android:id="@+id/MyInfoContainer">
 
-    <com.view.ActionBarView
-        android:id="@+id/action_bar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/actionbar_height">
-
-    </com.view.ActionBarView>
-
-    <ImageView
-        android:id="@+id/ivportrait"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/ic_launcher_round"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/action_bar"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:id="@+id/btnLoginAty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="登录"
-        android:layout_below="@+id/ivportrait"
-        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
