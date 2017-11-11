@@ -44,16 +44,30 @@ public class CRQueryActivity extends AppCompatActivity {
         initActionBarView();
 
         //先模拟一下数据
-        for (int i=0;i<10;i++){
-            classRooms.add(new ClassRoom(101,1,1,1,0,1,0,0));
-        }
+//        for (int i=0;i<10;i++){
+//            classRooms.add(new ClassRoom(101,1,1,1,0,1,0,0));
+//        }
 
 
         MySQLiteHelper helper = new MySQLiteHelper(this);
         SQLiteDatabase reader = helper.getReadableDatabase();
 
 
-        //Cursor c = reader.query()
+        Cursor c = reader.query("classroom", null, null, null, null, null, null);
+        ClassRoom cr = null;
+        while (c.moveToNext()) {
+            cr = new ClassRoom(c.getInt(c.getColumnIndex(Constant.KEY_NUM))
+                    , c.getInt(c.getColumnIndex(Constant.KEY_SIZE))
+                    , c.getInt(c.getColumnIndex(Constant.KEY_FLOOR))
+                    , c.getInt(c.getColumnIndex(Constant.KEY_STATE12))
+                    , c.getInt(c.getColumnIndex(Constant.KEY_STATE34))
+                    , c.getInt(c.getColumnIndex(Constant.KEY_STATE56))
+                    , c.getInt(c.getColumnIndex(Constant.KEY_STATE78))
+                    , c.getInt(c.getColumnIndex(Constant.KEY_STATE910)));
+            classRooms.add(cr);
+        }
+        c.close();
+        reader.close();
 
 
         rvCR = (RecyclerView) findViewById(R.id.rv_classroom);
@@ -66,7 +80,7 @@ public class CRQueryActivity extends AppCompatActivity {
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-                return new ViewHolder(LayoutInflater.from(CRQueryActivity.this).inflate(R.layout.list_item,null,false));
+                return new ViewHolder(LayoutInflater.from(CRQueryActivity.this).inflate(R.layout.list_item, null, false));
             }
 
             @Override
@@ -74,24 +88,24 @@ public class CRQueryActivity extends AppCompatActivity {
                 ViewHolder vh = (ViewHolder) holder;
                 ClassRoom cr = classRooms.get(position);
 
-                vh.getTvNum().setText(""+cr.getNumber());
-                if (cr.getState12() == ClassRoom.OCCUPIED){
+                vh.getTvNum().setText("" + cr.getNumber());
+                if (cr.getState12() == ClassRoom.OCCUPIED) {
 
                     vh.getImbtn12().setImageResource(android.R.drawable.ic_input_add);
                 }
-                if (cr.getState34() == ClassRoom.OCCUPIED){
+                if (cr.getState34() == ClassRoom.OCCUPIED) {
 
                     vh.getImbtn34().setImageResource(android.R.drawable.ic_input_add);
                 }
-                if (cr.getState56() == ClassRoom.OCCUPIED){
+                if (cr.getState56() == ClassRoom.OCCUPIED) {
 
                     vh.getImbtn56().setImageResource(android.R.drawable.ic_input_add);
                 }
-                if (cr.getState78() == ClassRoom.OCCUPIED){
+                if (cr.getState78() == ClassRoom.OCCUPIED) {
 
                     vh.getImbtn78().setImageResource(android.R.drawable.ic_input_add);
                 }
-                if (cr.getState910() == ClassRoom.OCCUPIED){
+                if (cr.getState910() == ClassRoom.OCCUPIED) {
 
                     vh.getImbtn910().setImageResource(android.R.drawable.ic_input_add);
                 }
@@ -99,15 +113,13 @@ public class CRQueryActivity extends AppCompatActivity {
 
             @Override
             public int getItemCount() {
-                if (classRooms.size()<=10){
-                    return classRooms.size();
-                }
-                return 10;
+                return classRooms.size();
+
             }
         });
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
 
 
         private TextView tvNum;
@@ -116,7 +128,6 @@ public class CRQueryActivity extends AppCompatActivity {
         private ImageButton imbtn56;
         private ImageButton imbtn78;
         private ImageButton imbtn910;
-
 
 
         public ViewHolder(View itemView) {
@@ -156,7 +167,7 @@ public class CRQueryActivity extends AppCompatActivity {
         }
     }
 
-    private void initActionBarView(){
+    private void initActionBarView() {
 
         actionBarView = (ActionBarView) findViewById(R.id.action_bar);
         actionBarView.setOnBackClick(new View.OnClickListener() {
@@ -168,7 +179,7 @@ public class CRQueryActivity extends AppCompatActivity {
         actionBarView.setOnMoreClick(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.showToast(CRQueryActivity.this,"more");
+                ToastUtil.showToast(CRQueryActivity.this, "more");
             }
         });
     }

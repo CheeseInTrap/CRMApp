@@ -2,7 +2,6 @@ package com.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.Preference;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -33,5 +32,12 @@ public class PreferenceUtil {
     public static int getInt(Context context,String preferencesName,String key){
         SharedPreferences preferences =  context.getSharedPreferences(preferencesName,MODE_PRIVATE);
         return preferences.getInt(key,0);
+    }
+
+    public static void clear(Context context,String preferencesName){
+        SharedPreferences preferences = context.getSharedPreferences(preferencesName,MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.commit();
     }
 }

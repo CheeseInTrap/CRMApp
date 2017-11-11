@@ -13,6 +13,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             "username TEXT DEFAULT \"\"," +
             "password TEXT DEFAULT \"\"," +
             "level int DEFAULT \"\"," +
+            "role int," +
             "emailaddress TEXT DEFAULT \"\")";
 
     private static final String CREATE_CLASSROOM_TABLE =  "create table classroom(" +
@@ -20,9 +21,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             "size integer," +
             "floor integer," +
             "state12 integer," +
-            "state34 integer" +
-            "state56 integer" +
-            "state78 integer" +
+            "state34 integer," +
+            "state56 integer," +
+            "state78 integer," +
             "state910 integer)";
 
 

@@ -10,8 +10,11 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.user.crmapp.R;
+import com.model.Constant;
 import com.util.ToastUtil;
 import com.util.db.MySQLiteHelper;
+
+import java.util.Random;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -44,7 +47,8 @@ public class RegisterActivity extends AppCompatActivity {
                 cv.put("username",Name.getText().toString());
                 cv.put("password",Password.getText().toString());
                 cv.put("emailaddress",EmailAddress.getText().toString());
-                cv.put("level",1);
+                cv.put("level",new Random().nextInt(5)+1);
+                cv.put("role", Constant.admin);
 
                 dbuserWrite.insert("userInfo",null,cv);
                 dbuserWrite.close();

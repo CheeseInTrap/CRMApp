@@ -47,13 +47,19 @@ public class LoginActivity extends AppCompatActivity {
                 {
 
                     String dbpassword=c.getString(c.getColumnIndex("password"));
+                    String username = c.getString(c.getColumnIndex("username"));
+                    int level = c.getInt(c.getColumnIndex("level"));
+                    int role = c.getInt(c.getColumnIndex("role"));
                     ToastUtil.showToast(LoginActivity.this,dbpassword);
                     if (Password.getText().toString().equals(dbpassword))
                     {
                         Intent intenttest=new Intent(LoginActivity.this,MainActivity.class);
                         startActivity(intenttest);
                         ToastUtil.showToast(LoginActivity.this,"登录成功");
+                        PreferenceUtil.setData(LoginActivity.this,"userInfo","username",username);
                         PreferenceUtil.setData(LoginActivity.this,"userInfo","email",email);
+                        PreferenceUtil.setInt(LoginActivity.this,"userInfo","level",level);
+                        PreferenceUtil.setInt(LoginActivity.this,"userInfo","role",role);
                     }else{
                         ToastUtil.showToast(LoginActivity.this,"密码错误");
                     }

@@ -5,6 +5,7 @@
     android:layout_height="wrap_content">
 
     <ImageButton
+        android:paddingLeft="10dp"
         android:id="@+id/back"
         android:layout_width="@dimen/actionbar_icon_size"
         android:layout_height="@dimen/actionbar_icon_size"
