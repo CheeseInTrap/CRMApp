@@ -5,6 +5,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+<<<<<<< HEAD
+=======
+    <com.view.ActionBarView
+        android:id="@+id/action_bar"
+        android:gravity="center"
+        android:background="@color/style_color"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_height">
+    </com.view.ActionBarView>
+>>>>>>> 278f66818fcf7a95507d8a8a58220b6839d85f9b
 
     <TextView
         android:id="@+id/tvEmailAddress"

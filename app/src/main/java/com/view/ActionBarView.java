@@ -48,4 +48,12 @@ public class ActionBarView extends LinearLayout {
     public void setTitle(String s){
         title.setText(s);
     }
+
+    public void setBack(int id){
+        back.setImageResource(id);
+    }
+
+    public void setMore(int id) {
+        more.setImageResource(id);
+    }
 }

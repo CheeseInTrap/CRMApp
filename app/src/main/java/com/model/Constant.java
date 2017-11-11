@@ -9,4 +9,5 @@ public class Constant {
 
     public static final int user = 0;
     public static final int admin = 1;
+
 }

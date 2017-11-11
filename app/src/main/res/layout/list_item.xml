@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_list_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvNum"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="number"/>
+
+            <ImageButton
+                android:id="@+id/imbtn_12"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+            <ImageButton
+                android:id="@+id/imbtn_34"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+            <ImageButton
+                android:id="@+id/imbtn_56"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+            <ImageButton
+                android:id="@+id/imbtn_78"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+            <ImageButton
+                android:id="@+id/imbtn_910"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
