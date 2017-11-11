@@ -23,14 +23,7 @@ public class MyInfoFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_info_my,container,false);
-        view.findViewById(R.id.btnLoginAty).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentLogin=new Intent(getActivity(),LoginActivity.class);
-                startActivity(intentLogin);
 
-            }
-        });
 
         return view;
     }

@@ -39,29 +39,50 @@ public class RegisterActivity extends AppCompatActivity {
                 PasswordConfirm=(EditText)findViewById(R.id.etPasswordConfirm);
 
                 MySQLiteHelper helper =new MySQLiteHelper(RegisterActivity.this);
-                SQLiteDatabase dbuserWrite=helper.getWritableDatabase();
-                ContentValues cv=new ContentValues();
-                cv.put("username",Name.getText().toString());
-                cv.put("password",Password.getText().toString());
-                cv.put("emailaddress",EmailAddress.getText().toString());
-                cv.put("level",1);
 
-                dbuserWrite.insert("userInfo",null,cv);
-                dbuserWrite.close();
+                //判断邮箱是否存在
+                SQLiteDatabase dbuserRead=helper.getReadableDatabase();
+                Cursor cursor=dbuserRead.query("userInfo",null,"emailaddress=?",new String[]{EmailAddress.getText().toString()},null,null,null);
+                if (cursor.moveToNext())
+                {
+                    ToastUtil.showToast(RegisterActivity.this,"该邮箱已被注册过");
+                }
+                else
+                {
+                    if (!Password.getText().toString().equals(PasswordConfirm.getText().toString()))
+                    {
+                        ToastUtil.showToast(RegisterActivity.this,"确认密码错误");
+                    }
+                    else
+                    {
+                        SQLiteDatabase dbuserWrite=helper.getWritableDatabase();
+                        ContentValues cv=new ContentValues();
+                        cv.put("username",Name.getText().toString());
+                        cv.put("password",Password.getText().toString());
+                        cv.put("emailaddress",EmailAddress.getText().toString());
+                        cv.put("level",1);
+
+                        dbuserWrite.insert("userInfo",null,cv);
+                        dbuserWrite.close();
 
 
-                SQLiteDatabase reader = helper.getReadableDatabase();
-                Cursor c= reader.query("userInfo",null,"emailaddress=?",new String[]{EmailAddress.getText().toString()},null,null,null);
+                        SQLiteDatabase reader = helper.getReadableDatabase();
+                        Cursor c= reader.query("userInfo",null,"emailaddress=?",new String[]{EmailAddress.getText().toString()},null,null,null);
 
-                if (c.moveToNext()){
-                    ToastUtil.showToast(RegisterActivity.this,"注册成功");
-                    Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
-                    startActivity(intent);
+                        if (c.moveToNext()){
+                            ToastUtil.showToast(RegisterActivity.this,"注册成功");
+                            Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
+                            startActivity(intent);
 
-                }else{
-                    ToastUtil.showToast(RegisterActivity.this,"注册失败");
+                        }else{
+                            ToastUtil.showToast(RegisterActivity.this,"注册失败");
+                        }
+                        reader.close();
+                    }
                 }
 
+
+                dbuserRead.close();
 
             }
         });

@@ -47,7 +47,6 @@ public class LoginActivity extends AppCompatActivity {
                 {
 
                     String dbpassword=c.getString(c.getColumnIndex("password"));
-                    ToastUtil.showToast(LoginActivity.this,dbpassword);
                     if (Password.getText().toString().equals(dbpassword))
                     {
                         Intent intenttest=new Intent(LoginActivity.this,MainActivity.class);
