@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
-        imageView.setImageResource(R.drawable.drawer_page);
+        imageView.setImageResource(R.drawable.main);
         List<String> contents = new ArrayList<>();
         contents.add(PreferenceUtil.getData(this,"userInfo","username"));
         contents.add(PreferenceUtil.getData(this,"userInfo","email"));

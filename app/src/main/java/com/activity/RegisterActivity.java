@@ -46,13 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
                 PasswordConfirm=(EditText)findViewById(R.id.etPasswordConfirm);
 
                 MySQLiteHelper helper =new MySQLiteHelper(RegisterActivity.this);
-                SQLiteDatabase dbuserWrite=helper.getWritableDatabase();
-                ContentValues cv=new ContentValues();
-                cv.put("username",Name.getText().toString());
-                cv.put("password",Password.getText().toString());
-                cv.put("emailaddress",EmailAddress.getText().toString());
-                cv.put("level",new Random().nextInt(5)+1);
-                cv.put("role", Constant.admin);
+
 
                 if (!isEmail(EmailAddress.getText().toString()))
                 {
@@ -66,6 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if (cursor.moveToNext())
                     {
                         ToastUtil.showToast(RegisterActivity.this,"该邮箱已被注册过");
+
                     }
                     else
                     {
@@ -81,10 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
                             cv.put("password",Password.getText().toString());
                             cv.put("emailaddress",EmailAddress.getText().toString());
                             cv.put("level",new Random().nextInt(5)+1);
-                            cv.put("role",Constant.admin);
-
-                            dbuserWrite.insert("userInfo",null,cv);
-                            dbuserWrite.close();
+                            cv.put("role", Constant.admin);
 
 
                             SQLiteDatabase reader = helper.getReadableDatabase();
