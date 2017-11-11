@@ -17,7 +17,7 @@ public class EntryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_entry);
         SDKInitializer.initialize(getApplicationContext());
 
-        String username = PreferenceUtil.getData(this,"loginInfo","username");
+        String username = PreferenceUtil.getData(this,"loginInfo","email");
         if (username == null){
             Intent intent = new Intent(this,LoginActivity.class);
             startActivity(intent);
@@ -26,7 +26,7 @@ public class EntryActivity extends AppCompatActivity {
         }
 
 
-        MySQLiteHelper helper = new MySQLiteHelper(this,"userInfo",null,1);
+        //MySQLiteHelper helper = new MySQLiteHelper(this,"userInfo",null,1);
         //helper.onCreate();
 
         try {

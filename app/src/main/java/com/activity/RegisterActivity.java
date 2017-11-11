@@ -4,17 +4,14 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.user.crmapp.R;
-import com.util.db.DBUser;
+import com.util.ToastUtil;
+import com.util.db.MySQLiteHelper;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -41,8 +38,8 @@ public class RegisterActivity extends AppCompatActivity {
                 Password=(EditText)findViewById(R.id.etPassword);
                 PasswordConfirm=(EditText)findViewById(R.id.etPasswordConfirm);
 
-                DBUser dbuser=new DBUser(RegisterActivity.this);
-                SQLiteDatabase dbuserWrite=dbuser.getWritableDatabase();
+                MySQLiteHelper helper =new MySQLiteHelper(RegisterActivity.this);
+                SQLiteDatabase dbuserWrite=helper.getWritableDatabase();
                 ContentValues cv=new ContentValues();
                 cv.put("username",Name.getText().toString());
                 cv.put("password",Password.getText().toString());
@@ -52,20 +49,19 @@ public class RegisterActivity extends AppCompatActivity {
                 dbuserWrite.insert("userInfo",null,cv);
                 dbuserWrite.close();
 
-                DBUser dbUser1=new DBUser(RegisterActivity.this);
-                SQLiteDatabase dbuser1Read=dbUser1.getReadableDatabase();
-                Cursor c=dbuser1Read.query("userInfo",null,null,null,null,null,null);
-                while (c.moveToNext())
-                {
-                    System.out.println("传入数据库成功");
-                    System.out.println(c.getString(c.getColumnIndex("username")));
-                    System.out.println(c.getString(c.getColumnIndex("password")));
-                    System.out.println(c.getString(c.getColumnIndex("emailaddress")));
-                }
-                c.close();
 
-                Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
-                startActivity(intent);
+                SQLiteDatabase reader = helper.getReadableDatabase();
+                Cursor c= reader.query("userInfo",null,"emailaddress=?",new String[]{EmailAddress.getText().toString()},null,null,null);
+
+                if (c.moveToNext()){
+                    ToastUtil.showToast(RegisterActivity.this,"注册成功");
+                    Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
+                    startActivity(intent);
+
+                }else{
+                    ToastUtil.showToast(RegisterActivity.this,"注册失败");
+                }
+
 
             }
         });

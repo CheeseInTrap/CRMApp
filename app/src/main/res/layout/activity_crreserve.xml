@@ -97,20 +97,17 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-        <TextView
-            android:text="预约理由"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:gravity="center"/>
-        <View
-            android:layout_width="10dp"
-            android:layout_height="match_parent"/>
+        android:layout_weight="3">
+
 
         <EditText
+            android:gravity="top"
             android:id="@+id/et_reason"
+            android:hint="请在此处填写你的预约理由"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/edit_bg"
+            android:padding="10dp">
 
         </EditText>
 

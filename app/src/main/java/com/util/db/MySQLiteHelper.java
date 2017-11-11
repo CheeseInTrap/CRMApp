@@ -13,31 +13,27 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             "username TEXT DEFAULT \"\"," +
             "password TEXT DEFAULT \"\"," +
             "level int DEFAULT \"\"," +
-            "email TEXT DEFAULT \"\")";
+            "emailaddress TEXT DEFAULT \"\")";
 
-    /*private static final String CREATE_POINTS_TABLE = "create table points(" +
-            "network_id text," +
-            "point_id text primary key,"+
-            "version text,"+
-            "longitude text," +
-            "latitude text)";*/
-//    private static final String CREATE_SIDES_TABLE = "create table sides(" +
-//            "network_id text," +
-//            "side_id text,"+
-//            "point_id text"+
-//            "point_num text"+
-//            "longitude text," +
-//            "latitude text)";
+    private static final String CREATE_CLASSROOM_TABLE =  "create table classroom(" +
+            "number integer," +
+            "size integer," +
+            "floor integer," +
+            "state12 integer," +
+            "state34 integer" +
+            "state56 integer" +
+            "state78 integer" +
+            "state910 integer)";
 
-    public MySQLiteHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, "UserInfo", null, 1);
+
+    public MySQLiteHelper(Context context) {
+        super(context, "DB", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_USERINFO_TABLE);
-        //db.execSQL(CREATE_POINTS_TABLE);
-        //db.execSQL(CREATE_SIDES_TABLE);
+        db.execSQL(CREATE_CLASSROOM_TABLE);
     }
 
     @Override

@@ -28,32 +28,30 @@
             android:value="O11fbB7GSH6ieHpcobOtrZdTD2XG9Zsi" />
 
         <activity android:name="com.activity.MainActivity">
+
+        </activity>
+        <activity android:name="com.activity.MapActivity" />
+        <activity android:name="com.activity.EntryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.activity.MapActivity" />
-        <activity android:name="com.activity.EntryActivity" />
         <activity android:name="com.activity.LoginActivity" />
-<<<<<<< HEAD
+
         <activity android:name="com.activity.RegisterActivity"/>
-=======
->>>>>>> 278f66818fcf7a95507d8a8a58220b6839d85f9b
+
+
+        <activity android:name="com.activity.CRQueryActivity" />
+        <activity android:name="com.activity.CRReserveActivity"></activity>
+
 
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:permission="android.permission.BAIDU_LOCATION_SERVICE"
             android:process=":remote" />
-
-<<<<<<< HEAD
-        <activity android:name="com.activity.SUCCESSTEST"></activity>
-=======
-        <activity android:name="com.activity.CRQueryActivity" />
-        <activity android:name="com.activity.CRReserveActivity"></activity>
->>>>>>> 278f66818fcf7a95507d8a8a58220b6839d85f9b
     </application>
 
 </manifest>

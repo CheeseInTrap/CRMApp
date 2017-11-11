@@ -59,7 +59,7 @@
         android:text="登录" />
 
     <EditText
-        android:id="@+id/edEmailAddress"
+        android:id="@+id/etEmailAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/etPassword"

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.user.crmapp.R;
 import com.model.ClassRoom;
 import com.util.ToastUtil;
+import com.util.db.MySQLiteHelper;
 import com.view.ActionBarView;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 public class CRQueryActivity extends AppCompatActivity {
 
     private RecyclerView rvCR;
-    private CardView cardView;
+
 
     private ActionBarView actionBarView;
 
@@ -43,8 +44,10 @@ public class CRQueryActivity extends AppCompatActivity {
         }
 
 
+        MySQLiteHelper helper = new MySQLiteHelper(this);
+
+
         rvCR = (RecyclerView) findViewById(R.id.rv_classroom);
-        //cardView = (CardView) findViewById(R.id.cv_list_item);
 
 
         rvCR.setLayoutManager(new LinearLayoutManager(this));
