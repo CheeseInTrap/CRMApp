@@ -9,10 +9,11 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 
 public class MySQLiteHelper extends SQLiteOpenHelper {
-    private static final String CREATE_USERINFO_TABLE = "create table userInfo(" +
-            "username text," +
-            "password text," +
-            "email text)";
+    private static final String CREATE_USERINFO_TABLE = "CREATE TABLE userInfo(" +
+            "username TEXT DEFAULT \"\"," +
+            "password TEXT DEFAULT \"\"," +
+            "level int DEFAULT \"\"," +
+            "email TEXT DEFAULT \"\")";
 
     /*private static final String CREATE_POINTS_TABLE = "create table points(" +
             "network_id text," +
@@ -20,16 +21,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             "version text,"+
             "longitude text," +
             "latitude text)";*/
-    private static final String CREATE_SIDES_TABLE = "create table sides(" +
-            "network_id text," +
-            "side_id text,"+
-            "point_id text"+
-            "point_num text"+
-            "longitude text," +
-            "latitude text)";
+//    private static final String CREATE_SIDES_TABLE = "create table sides(" +
+//            "network_id text," +
+//            "side_id text,"+
+//            "point_id text"+
+//            "point_num text"+
+//            "longitude text," +
+//            "latitude text)";
 
     public MySQLiteHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+        super(context, "UserInfo", null, 1);
     }
 
     @Override

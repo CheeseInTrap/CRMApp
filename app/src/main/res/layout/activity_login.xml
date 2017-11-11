@@ -9,16 +9,16 @@
 
 
     <TextView
-        android:id="@+id/tvName"
+        android:id="@+id/tvEmailAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="用户名："
-        android:layout_marginTop="151dp"
         android:layout_alignParentTop="true"
+        android:layout_marginEnd="38dp"
+        android:layout_marginRight="38dp"
+        android:layout_marginTop="151dp"
         android:layout_toLeftOf="@+id/btnLogin"
         android:layout_toStartOf="@+id/btnLogin"
-        android:layout_marginRight="38dp"
-        android:layout_marginEnd="38dp" />
+        android:text="邮箱：" />
 
     <TextView
         android:id="@+id/tvPassword"
@@ -26,9 +26,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:text="密码："
-        android:layout_below="@+id/tvName"
-        android:layout_alignRight="@+id/tvName"
-        android:layout_alignEnd="@+id/tvName" />
+        android:layout_below="@+id/tvEmailAddress"
+        android:layout_alignRight="@+id/tvEmailAddress"
+        android:layout_alignEnd="@+id/tvEmailAddress" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -51,7 +51,7 @@
         android:text="登录" />
 
     <EditText
-        android:id="@+id/edName"
+        android:id="@+id/edEmailAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/etPassword"
