@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <Button
+        android:id="@+id/create_databasezx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create databasezx"/>
+
+    <Button
+        android:id="@+id/create_databasecy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create databasecy"/>
+
+    <Button
+        android:id="@+id/query_classroom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Query classroom"
+        />
+
+    <TextView
+        android:id="@+id/Building"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="教学楼"/>
+
+    <EditText
+        android:id="@+id/Building_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/alert_light_frame"
+        android:hint="正心/诚意"
+        />
+
+    <TextView
+        android:id="@+id/Floor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="教室楼层"/>
+
+    <EditText
+        android:id="@+id/Floor_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/alert_light_frame"
+        android:hint="1~2"
+        />
+
+    <TextView
+        android:id="@+id/Size"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="教室规模"/>
+
+    <EditText
+        android:id="@+id/Size_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/alert_light_frame"
+        android:hint="1~3"
+        />
+
+    <Button
+        android:id="@+id/OK"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="确定"
+        />
+
+    <TextView
+        android:id="@+id/show_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
