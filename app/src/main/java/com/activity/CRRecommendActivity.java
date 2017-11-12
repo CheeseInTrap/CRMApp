@@ -29,6 +29,7 @@ import java.util.Random;
 
 public class CRRecommendActivity extends AppCompatActivity {
     private MyDatabaseHelper dbHelper;
+    private MySQLiteHelper helper = new MySQLiteHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,7 @@ public class CRRecommendActivity extends AppCompatActivity {
         setContentView(R.layout.activity_crrecommend);
 
 
-        MySQLiteHelper helper = new MySQLiteHelper(this);
+       //MySQLiteHelper helper = new MySQLiteHelper(this);
         SQLiteDatabase writer = helper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         Random random = new Random();
@@ -62,15 +63,15 @@ public class CRRecommendActivity extends AppCompatActivity {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText BuildingET = (EditText) findViewById(R.id.Building_text);
-                String Building = BuildingET.getText().toString();
                 EditText FloorET = (EditText) findViewById(R.id.Floor_text);
                 String Floor = FloorET.getText().toString();
                 EditText SizeET = (EditText) findViewById(R.id.Size_text);
                 String Size = SizeET.getText().toString();
 
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
-                Cursor cursor = db.query("classroom", null, "floor = ? and size = ?", new String[]{Floor, Size}, null, null, null);
+                //SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+                SQLiteDatabase writer = helper.getWritableDatabase();
+                Cursor cursor = writer.query("classroom", null, "floor = ? and size = ?", new String[]{Floor, Size}, null, null, null);
                 ArrayList<String> Snum = new ArrayList<String>();
                 ArrayList<String> Sstate12 = new ArrayList<String>();
                 ArrayList<String> Sstate34 = new ArrayList<String>();
