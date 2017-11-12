@@ -27,9 +27,7 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="O11fbB7GSH6ieHpcobOtrZdTD2XG9Zsi" />
 
-        <activity android:name="com.activity.MainActivity">
-
-        </activity>
+        <activity android:name="com.activity.MainActivity" />
         <activity android:name="com.activity.MapActivity" />
         <activity android:name="com.activity.EntryActivity">
             <intent-filter>
@@ -39,26 +37,23 @@
             </intent-filter>
         </activity>
         <activity android:name="com.activity.LoginActivity" />
-
-        <activity android:name="com.activity.RegisterActivity"/>
-
-
+        <activity android:name="com.activity.RegisterActivity" />
         <activity android:name="com.activity.CRQueryActivity" />
-        <activity android:name="com.activity.CRReserveActivity"></activity>
-        <activity android:name="com.activity.CRRecommendActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name="com.activity.CRReserveActivity" />
+        <activity android:name="com.activity.CRRecommendActivity" />
         <activity android:name="com.activity.CRRecresultActivity" />
-
 
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:permission="android.permission.BAIDU_LOCATION_SERVICE"
             android:process=":remote" />
+
+        <activity android:name="com.activity.ReserveInfoActivity" />
+        <activity android:name="com.activity.ReserveDetailActivity" />
+        <activity android:name="com.activity.AdminActivity"></activity>
+
+        <activity android:name="com.activity.CheckReserveActivity"/>
     </application>
 
 </manifest>

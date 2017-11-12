@@ -50,7 +50,6 @@ public class LoginActivity extends AppCompatActivity {
                     String username = c.getString(c.getColumnIndex("username"));
                     int level = c.getInt(c.getColumnIndex("level"));
                     int role = c.getInt(c.getColumnIndex("role"));
-                    ToastUtil.showToast(LoginActivity.this,dbpassword);
                     if (Password.getText().toString().equals(dbpassword))
                     {
                         Intent intenttest=new Intent(LoginActivity.this,MainActivity.class);
@@ -65,7 +64,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }else{
                     ToastUtil.showToast(LoginActivity.this,"您尚未注册");
-                    startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
                 }
                 c.close();
                 dbuserRead.close();

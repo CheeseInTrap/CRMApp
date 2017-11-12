@@ -6,7 +6,6 @@
     tools:context="com.activity.MainActivity">
 
     <LinearLayout
-        android:background="@color/style_color_light"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -37,6 +36,7 @@
         android:layout_gravity="start"
         android:background="@color/white">
         <ImageView
+            android:padding="80dp"
             android:id="@+id/img"
             android:layout_width="match_parent"
             android:layout_height="200dp" />

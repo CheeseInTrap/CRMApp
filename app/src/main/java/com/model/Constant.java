@@ -18,6 +18,10 @@ public class Constant {
     public static final String KEY_STATE56 = "state56";
     public static final String KEY_STATE78 = "state78";
     public static final String KEY_STATE910 = "state910";
+    public static final int STATE_UNCHECKED = 0;
+    public static final int STATE_PASS = 1;
+    public static final int STATE_REJECTED = 2;
+
 
 
 

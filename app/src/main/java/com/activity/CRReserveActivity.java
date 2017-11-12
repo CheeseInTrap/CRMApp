@@ -1,7 +1,13 @@
 package com.activity;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.ContentValues;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -15,7 +21,11 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.example.user.crmapp.R;
+import com.model.Constant;
+import com.model.ReserveInfo;
+import com.util.PreferenceUtil;
 import com.util.ToastUtil;
+import com.util.db.MySQLiteHelper;
 import com.view.ActionBarView;
 
 import java.util.Calendar;
@@ -37,6 +47,10 @@ public class CRReserveActivity extends AppCompatActivity {
 
     private static int time;
     private static int isTimeSel = 0;
+    private static int year_sel;
+    private static int month_sel;
+    private static int date_sel;
+
 
 
     @Override
@@ -83,6 +97,9 @@ public class CRReserveActivity extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
                         tvTime.setText(String.format("%d--%d--%d",year,month+1,dayOfMonth));
+                        year_sel = year;
+                        month_sel = month;
+                        date_sel = dayOfMonth;
                     }
                 },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DATE)).show();
             }
@@ -93,7 +110,6 @@ public class CRReserveActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int CRNum = -1;
                 if (etCRNum.getText().toString().equals("")){
-
                 }else{
                     CRNum = Integer.parseInt(etCRNum.getText().toString());
                 }
@@ -106,9 +122,36 @@ public class CRReserveActivity extends AppCompatActivity {
                 Log.v("教室预约",reason);
                 if (isTimeSel == 1 && CRNum!=-1 && !reason.equals("")){
 
+                    MySQLiteHelper helper = new MySQLiteHelper(CRReserveActivity.this);
+                    SQLiteDatabase writer = helper.getWritableDatabase();
+                    ContentValues cv = new ContentValues();
+                    cv.put("number",Integer.parseInt(etCRNum.getText().toString()));
+                    cv.put("time",time);
+                    cv.put("year",year_sel);
+                    cv.put("month",month_sel);
+                    cv.put("date",date_sel);
+                    cv.put("reason",reason);
+                    cv.put("email", PreferenceUtil.getData(CRReserveActivity.this,"userInfo","email"));
+                    cv.put("state", Constant.STATE_UNCHECKED);
+                    writer.insert("reserveinfo",null,cv);
+                    writer.close();
+
+                    new AlertDialog.Builder(CRReserveActivity.this)
+                            .setTitle("提醒")
+                            .setMessage("预约消息发送成功")
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    finish();
+                                }
+                            })
+                            .show();
                 }else {
                     ToastUtil.showToast(CRReserveActivity.this,"请确认信息填写完整");
                 }
+
+//                ReserveInfo info = new ReserveInfo(Integer.parseInt(etCRNum.getText().toString())
+//                        ,time,year_sel,month_sel,date_sel,reason);
             }
         });
 

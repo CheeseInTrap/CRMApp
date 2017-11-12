@@ -78,6 +78,8 @@ public class RegisterActivity extends AppCompatActivity {
                             cv.put("level",new Random().nextInt(5)+1);
                             cv.put("role", Constant.admin);
 
+                            dbuserWrite.insert("userInfo",null,cv);
+
 
                             SQLiteDatabase reader = helper.getReadableDatabase();
                             Cursor c= reader.query("userInfo",null,"emailaddress=?",new String[]{EmailAddress.getText().toString()},null,null,null);

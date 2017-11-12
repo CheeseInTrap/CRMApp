@@ -4,11 +4,29 @@
     <color name="colorPrimaryDark">#49DEB6</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="style_color">#49DEB6</color>
-    <color name="style_color_light">#6CE2CC</color>
+    <color name="style_color">#ffffff</color>
+    <color name="style_color_light">#ffffff</color>
 
 
 
     <!--一些标准色-->
     <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+
+    <color name="color_1">#F1B136</color>
+    <color name="color_2">#03A679</color>
+    <color name="color_3">#E75A5A</color>
+    <color name="color_4">#228FC1</color>
+    <color name="color_5">#663D4E</color>
+
+
+
+    <color name="funbg_pressed_1">#D39636</color>
+    <color name="funbg_pressed_2">#037E54</color>
+    <color name="funbg_pressed_3">#C95D5D</color>
+    <color name="funbg_pressed_4">#2374A3</color>
+    <color name="funbg_pressed_5">#48242D</color>
+
+
+
 </resources>

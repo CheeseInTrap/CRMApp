@@ -26,6 +26,17 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             "state78 integer," +
             "state910 integer)";
 
+    private static final String CREATE_RESERVE_INFO_TABLE = "create table reserveinfo("+
+            "_id integer primary key autoincrement,"+
+            "number integer," +
+            "time integer," +
+            "year integer," +
+            "month integer," +
+            "date integer," +
+            "reason text," +
+            "email text," +
+            "state int)";
+
 
     public MySQLiteHelper(Context context) {
         super(context, "DB", null, 1);
@@ -35,6 +46,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_USERINFO_TABLE);
         db.execSQL(CREATE_CLASSROOM_TABLE);
+        db.execSQL(CREATE_RESERVE_INFO_TABLE);
     }
 
     @Override

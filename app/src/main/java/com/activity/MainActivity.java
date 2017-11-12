@@ -6,24 +6,21 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.example.user.crmapp.R;
+import com.model.ReserveInfo;
 import com.util.PreferenceUtil;
 import com.util.ToastUtil;
 import com.view.ActionBarView;
@@ -44,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawer;
     private LinearLayout drawerCon;
     private ListView listView;
+
     private ImageView imageView;
 
     private ActionBarDrawerToggle toggle;
@@ -52,8 +50,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private int[] pics = new int[]{R.drawable.whale, R.drawable.fox, R.drawable.crab, R.drawable.koala, R.drawable.chick};
+    private int[] pics = new int[]{R.drawable.icon_1, R.drawable.icon_2, R.drawable.icon_3, R.drawable.icon_4, R.drawable.icon_5};
     private String[] titles = new String[]{"校园地图", "教室查询", "教室预约", "教室推荐", "预约信息"};
+
+    private int[] icons = new int[]{R.drawable.user,R.drawable.email,R.drawable.level,R.drawable.authority,R.drawable.logout};
+    private int[] colors = new int[]{R.drawable.funbg_1,R.drawable.funbg_2,R.drawable.funbg_3,R.drawable.funbg_4,R.drawable.funbg_5};
 
 
 
@@ -94,20 +95,25 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
-        imageView.setImageResource(R.drawable.main);
+        //imageView.setImageResource(R.drawable.main);
         List<String> contents = new ArrayList<>();
         contents.add(PreferenceUtil.getData(this,"userInfo","username"));
         contents.add(PreferenceUtil.getData(this,"userInfo","email"));
         contents.add(""+PreferenceUtil.getInt(this,"userInfo","level"));
-        contents.add(""+PreferenceUtil.getInt(this,"userInfo","role"));
+        contents.add("管理员");
         contents.add("退出登录");
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,contents);
+
+        ListAdapter adapter = new ListAdapter(contents);
         listView.setAdapter(adapter);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
+                    case 3:
+                        startActivity(new Intent(MainActivity.this,AdminActivity.class));
+                        break;
                     case 4:
 
                         PreferenceUtil.clear(MainActivity.this,"userInfo");
@@ -132,8 +138,11 @@ public class MainActivity extends AppCompatActivity {
 
                 ViewHolder vh = (ViewHolder) holder;
 
+                //vh.getCardView().setBackgroundResource(R.drawable.bull);
                 vh.getImageView().setImageResource(pics[position]);
+                vh.getImageView().setBackgroundResource(colors[position]);
                 vh.getTextView().setText(titles[position]);
+                vh.getTextView().setBackgroundResource(colors[position]);
             }
 
             @Override
@@ -210,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
         public TextView getTextView() {
             return textView;
         }
+
     }
 
     public void onItemClick(View view) {
@@ -228,10 +238,48 @@ public class MainActivity extends AppCompatActivity {
             case 3:
                 intent = new Intent(this, CRRecommendActivity.class);
                 break;
+            case 4:
+                intent = new Intent(this, ReserveInfoActivity.class);
+                break;
             default:
                 break;
         }
         startActivity(intent);
+    }
+
+
+    class ListAdapter extends BaseAdapter{
+        private List<String> contents;
+
+        ListAdapter(List<String> contents){
+            this.contents = contents;
+        }
+
+        @Override
+        public int getCount() {
+            return 5;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.drawer_list_item,null,false);
+            ImageView img = (ImageView) view.findViewById(R.id.img);
+            TextView tv = (TextView) view.findViewById(R.id.tv);
+
+            img.setImageResource(icons[position]);
+            tv.setText(contents.get(position));
+            return view;
+        }
     }
 
 
