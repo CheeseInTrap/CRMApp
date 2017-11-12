@@ -5,25 +5,6 @@
     android:layout_height="match_parent">
 
 
-    <Button
-        android:id="@+id/create_databasezx"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Create databasezx"/>
-
-    <Button
-        android:id="@+id/create_databasecy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Create databasecy"/>
-
-    <Button
-        android:id="@+id/query_classroom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Query classroom"
-        />
-
     <TextView
         android:id="@+id/Building"
         android:layout_width="match_parent"
