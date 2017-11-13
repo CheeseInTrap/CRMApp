@@ -39,7 +39,8 @@
             android:padding="80dp"
             android:id="@+id/img"
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="200dp"
+            android:background="@color/style_color" />
         <View
             android:background="@color/style_color_light"
             android:layout_width="match_parent"
@@ -47,12 +48,18 @@
         <ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:choiceMode="singleChoice"
             android:divider="@color/cardview_light_background"
             android:dividerHeight="1dp">
 
         </ListView>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/login" />
 
     </LinearLayout>
 

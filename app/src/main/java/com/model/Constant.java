@@ -22,6 +22,10 @@ public class Constant {
     public static final int STATE_PASS = 1;
     public static final int STATE_REJECTED = 2;
 
+    public static final int SIZE_SMALL = 0;
+    public static final int SIZE_MEDIUM = 1;
+    public static final int SIZE_LARGE = 2;
+
 
 
 

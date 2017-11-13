@@ -4,8 +4,9 @@
     <color name="colorPrimaryDark">#49DEB6</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="style_color">#ffffff</color>
-    <color name="style_color_light">#ffffff</color>
+    <color name="style_color">#AA7BA5FF </color>
+    <color name="style_color_light">#7BA5FF</color>
+    <color name="style_color_dark">#887BA5FF</color>
 
 
 
@@ -27,6 +28,17 @@
     <color name="funbg_pressed_4">#2374A3</color>
     <color name="funbg_pressed_5">#48242D</color>
 
+    <color name="color_bg">#AA228FC1</color>
+    <color name="btn_normal">#77CDFE</color>
+
+    <color name="main_1">#AAFF8A6F</color>
+    <color name="main_2">#AA77CDFE</color>
+    <color name="main_3">#AA66CE6D</color>
+    <color name="main_4">#5566CE6D</color>
+    <color name="main_5">#55FF8A6F</color>
+
+    <color name="main_dark_1">#FF8A6F</color>
+    <color name="main_dark_2">#AA66CE6D</color>
 
 
 </resources>

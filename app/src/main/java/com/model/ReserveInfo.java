@@ -1,12 +1,12 @@
 package com.model;
 
+import cn.bmob.v3.BmobObject;
+
 /**
  * 作者 ： Created by user on 2017/11/12 14:06.
  */
 
-public class ReserveInfo {
-
-    private int id;
+public class ReserveInfo extends BmobObject{
 
     private int number;
     private int time;
@@ -18,8 +18,12 @@ public class ReserveInfo {
     private String email;
     private int state;
 
-    public ReserveInfo(int id,int number,int time,int year,int month,int date,String reason,String email,int state){
-        this.id = id;
+    public ReserveInfo(){
+
+    }
+
+    public ReserveInfo(int number,int time,int year,int month,int date,String reason,String email,int state){
+
         this.number = number;
         this.time = time;
         this.year = year;
@@ -30,9 +34,7 @@ public class ReserveInfo {
         this.state = state;
     }
 
-    public int getId() {
-        return id;
-    }
+
 
     public int getNumber() {
         return number;
@@ -64,6 +66,10 @@ public class ReserveInfo {
 
     public int getState() {
         return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 }
 

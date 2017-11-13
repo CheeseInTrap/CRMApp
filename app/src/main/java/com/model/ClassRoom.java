@@ -1,13 +1,16 @@
 
 package com.model;
 
+import cn.bmob.v3.BmobObject;
+
 /**
  * 作者 ： Created by zjr on 2017/11/10 16:17.
  */
 
-public class ClassRoom {
+public class ClassRoom extends BmobObject{
 
     private int number;
+    private int building;
     private int size;
     private int floor;
     private int state12;
@@ -28,10 +31,26 @@ public class ClassRoom {
         this.state56 = state56;
         this.state78 = state78;
         this.state910 = state910;
+        this.building = 0;
+    }
+    public ClassRoom(int number,int building,int size,int floor,int state12,int state34,int state56,int state78,int state910) {
+        this.number = number;
+        this.size = size;
+        this.floor = floor;
+        this.state12 = state12;
+        this.state34 = state34;
+        this.state56 = state56;
+        this.state78 = state78;
+        this.state910 = state910;
+        this.building = building;
     }
 
     public int getNumber() {
         return number;
+    }
+
+    public int getBuilding() {
+        return building;
     }
 
     public int getSize() {
@@ -60,6 +79,10 @@ public class ClassRoom {
 
     public int getState910() {
         return state910;
+    }
+
+    public void setBuilding(int building) {
+        this.building = building;
     }
 
     public void setState12(int state12) {

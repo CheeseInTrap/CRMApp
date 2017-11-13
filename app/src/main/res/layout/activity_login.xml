@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,78 +8,121 @@
     tools:context="com.activity.LoginActivity">
 
 
-    <com.view.ActionBarView
-        android:id="@+id/action_bar"
-        android:gravity="center"
-        android:background="@color/style_color"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/actionbar_height">
-    </com.view.ActionBarView>
+        android:layout_height="300dp">
 
-    <TextView
-        android:id="@+id/tvEmailAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="38dp"
-        android:layout_marginRight="38dp"
-        android:layout_marginTop="151dp"
-        android:layout_toLeftOf="@+id/btnLogin"
-        android:layout_toStartOf="@+id/btnLogin"
-        android:text="邮箱：" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:text="Sign in"
+            android:textColor="@color/style_color"
+            android:textSize="30dp" />
 
-    <TextView
-        android:id="@+id/tvPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="密码："
-        android:layout_below="@+id/tvEmailAddress"
-        android:layout_alignRight="@+id/tvEmailAddress"
-        android:layout_alignEnd="@+id/tvEmailAddress" />
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_gravity="center"
+            android:src="@drawable/login"/>
+    </FrameLayout>
 
-    <EditText
-        android:id="@+id/etPassword"
+
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:layout_alignBaseline="@+id/tvPassword"
-        android:layout_alignBottom="@+id/tvPassword"
-        android:layout_toRightOf="@+id/tvPassword"
-        android:layout_toEndOf="@+id/tvPassword" />
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/ll_bg"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitXY"
+            android:src="@drawable/mail_fill" />
+
+        <View
+            android:layout_width="5dp"
+            android:layout_height="match_parent" />
+
+        <EditText
+            android:id="@+id/etEmailAddress"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/edit"
+            android:ems="10"
+            android:gravity="center_vertical"
+            android:hint="user@example.com"
+            android:inputType="textEmailAddress"/>
+    </LinearLayout>
+
+    <View
+
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/ll_bg"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitXY"
+            android:src="@drawable/lock_fill" />
+
+        <View
+            android:layout_width="5dp"
+            android:layout_height="match_parent" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/edit"
+            android:ems="10"
+            android:gravity="center_vertical"
+            android:hint="password"
+            android:inputType="textPassword" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
 
     <Button
         android:id="@+id/btnLogin"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etPassword"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="79dp"
-        android:text="登录" />
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="sign in"
+        android:textColor="@color/white"
+        android:background="@drawable/btn"/>
 
-    <EditText
-        android:id="@+id/etEmailAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/etPassword"
-        android:layout_alignEnd="@+id/etPassword"
-        android:layout_alignRight="@+id/etPassword"
-        android:layout_marginBottom="31dp"
-        android:ems="10"
-        android:inputType="textEmailAddress" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
 
     <TextView
+        android:layout_gravity="center_horizontal"
         android:id="@+id/tvStartRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/etPassword"
-        android:layout_alignRight="@+id/etPassword"
-        android:layout_below="@+id/btnLogin"
-        android:layout_marginTop="55dp"
-        android:text=""
-        android:clickable="true"
-        android:focusable="true"/>
+        android:text="没有账号？点击注册"
+        android:textColor="@color/style_color_dark"/>
 
-</RelativeLayout>
+
+</LinearLayout>
 

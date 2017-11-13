@@ -1,56 +1,68 @@
 package com.model;
 
+import cn.bmob.v3.BmobObject;
+
 /**
  * Created by user on 2017/11/10.
  */
 
-public class User {
+public class User extends BmobObject{
 
-    private String UserName;
-    private String Password;
-    private String EmailAddress;
+    private String username;
+    private String password;
+    private String email;
+    private int level;
+    private int role;
 
 
-    public User(String EmailAddress,String UserName,String Password,int Level){
-        this.EmailAddress=EmailAddress;
-        this.UserName=UserName;
-        this.Password=Password;
-        this.Level=Level;
+    public User(String email, String UserName, String Password, int level, int role){
+        this.email = email;
+        this.username=UserName;
+        this.password =Password;
+        this.level = level;
+        this.role = role;
     }
 
-    public String getEmailAddress() {
-        return EmailAddress;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmailAddress(String emailAddress) {
-        EmailAddress = emailAddress;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getUserName() {
-        return UserName;
+        return username;
     }
 
     public void setUserName(String userName) {
-        UserName = userName;
+        this.username = userName;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 
 
     public int getLevel() {
-        return Level;
+        return level;
     }
 
     public void setLevel(int level) {
-        Level = level;
+        this.level = level;
     }
 
-    private int Level;
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
+
 
 }

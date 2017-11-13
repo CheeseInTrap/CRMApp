@@ -26,13 +26,14 @@
         android:id="@+id/tablayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/actionbar_height"
-        android:background="@color/colorPrimary"
+        android:background="@color/style_color"
         app:tabGravity="fill"
-        app:tabIndicatorColor="@color/black"
-        app:tabIndicatorHeight="2dp"
+        app:tabIndicatorColor="@color/white"
+        app:tabIndicatorHeight="5dp"
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/white"
-        app:tabTextColor="@color/white">
+        app:tabTextColor="@color/white"
+        style="@style/MyCustomTabLayout">
         <android.support.design.widget.TabItem
             android:text="校园地图"
             android:layout_width="wrap_content"

@@ -53,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
     private int[] pics = new int[]{R.drawable.icon_1, R.drawable.icon_2, R.drawable.icon_3, R.drawable.icon_4, R.drawable.icon_5};
     private String[] titles = new String[]{"校园地图", "教室查询", "教室预约", "教室推荐", "预约信息"};
 
-    private int[] icons = new int[]{R.drawable.user,R.drawable.email,R.drawable.level,R.drawable.authority,R.drawable.logout};
+    private int[] icons = new int[]{R.drawable.mine_fill,R.drawable.mail_fill,R.drawable.integral_fill,R.drawable.lock_fill
+            ,R.drawable.undo};
     private int[] colors = new int[]{R.drawable.funbg_1,R.drawable.funbg_2,R.drawable.funbg_3,R.drawable.funbg_4,R.drawable.funbg_5};
 
 
@@ -138,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
                 ViewHolder vh = (ViewHolder) holder;
 
-                //vh.getCardView().setBackgroundResource(R.drawable.bull);
+                //vh.getCardView().setCardBackgroundColor(colors[position]);
                 vh.getImageView().setImageResource(pics[position]);
                 vh.getImageView().setBackgroundResource(colors[position]);
                 vh.getTextView().setText(titles[position]);
@@ -194,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        actionBarView.setBack(R.drawable.user_info);
+        actionBarView.setBack(R.drawable.document_fill);
         actionBarView.setMore(R.drawable.more);
     }
 
@@ -204,11 +205,15 @@ public class MainActivity extends AppCompatActivity {
         private ImageView imageView;
         private TextView textView;
 
+        private CardView cardView;
+
         public ViewHolder(View itemView) {
             super(itemView);
 
             imageView = (ImageView) itemView.findViewById(R.id.img);
             textView = (TextView) itemView.findViewById(R.id.tv);
+
+            cardView = (CardView) itemView.findViewById(R.id.cardView);
 
         }
 
@@ -220,6 +225,9 @@ public class MainActivity extends AppCompatActivity {
             return textView;
         }
 
+        public CardView getCardView() {
+            return cardView;
+        }
     }
 
     public void onItemClick(View view) {

@@ -12,7 +12,17 @@ import android.widget.TextView;
 
 import com.example.user.crmapp.R;
 import com.model.Constant;
+import com.model.ReserveInfo;
+import com.util.ToastUtil;
 import com.util.db.MySQLiteHelper;
+
+import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.QueryListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 public class CheckReserveActivity extends AppCompatActivity {
 
@@ -22,6 +32,8 @@ public class CheckReserveActivity extends AppCompatActivity {
     private TextView tvReason;
     private Button btnAgree;
     private Button btnReject;
+
+    private static ReserveInfo info;
 
 
     @Override
@@ -39,91 +51,115 @@ public class CheckReserveActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
 
-        tvNum.setText(""+bundle.getInt("number"));
-        String time = "";
-        switch (bundle.getInt("time")){
-            case 0:
-                time = time + "1-2节";
-                break;
-            case 1:
-                time = time + "3-4节";
-                break;
-            case 2:
-                time = time + "5-6节";
-                break;
-            case 3:
-                time = time + "7-8节";
-                break;
-            case 4:
-                time = time + "9-10节";
-                break;
-            default:
-                break;
+        String id = bundle.getString("id");
+        BmobQuery<ReserveInfo> query = new BmobQuery<>();
+        query.getObject(id, new QueryListener<ReserveInfo>() {
+            @Override
+            public void done(ReserveInfo reserveInfo, BmobException e) {
+                if (e == null){
+                    info = reserveInfo;
+                    tvNum.setText(""+info.getNumber());
+                    String time = "";
+                    switch (info.getTime()){
+                        case 0:
+                            time = time + "1-2节";
+                            break;
+                        case 1:
+                            time = time + "3-4节";
+                            break;
+                        case 2:
+                            time = time + "5-6节";
+                            break;
+                        case 3:
+                            time = time + "7-8节";
+                            break;
+                        case 4:
+                            time = time + "9-10节";
+                            break;
+                        default:
+                            break;
 
-        }
-        tvTime.setText(time);
-        tvDate.setText(bundle.getInt("year")+"-"+(bundle.getInt("month")+1)+"-"+bundle.getInt("date"));
-        tvReason.setText(bundle.getString("reason"));
-        String state="";
-        switch (bundle.getInt("state")){
-            case Constant.STATE_PASS:
-                state = state+"通过";
-                break;
-            case Constant.STATE_UNCHECKED:
-                state = state+"待审核";
-                break;
-            case Constant.STATE_REJECTED:
-                state = state+"未通过";
-                break;
-            default:
-                break;
-        }
+                    }
+                    tvTime.setText(time);
+                    tvDate.setText(info.getYear()+"-"+(info.getMonth()+1)+"-"+info.getDate());
+                    tvReason.setText(info.getReason());
+                    String state="";
+                    switch (info.getState()){
+                        case Constant.STATE_PASS:
+                            state = state+"通过";
+                            break;
+                        case Constant.STATE_UNCHECKED:
+                            state = state+"待审核";
+                            break;
+                        case Constant.STATE_REJECTED:
+                            state = state+"未通过";
+                            break;
+                        default:
+                            break;
+                    }
+
+                }else {
+                    ToastUtil.showToast(CheckReserveActivity.this,"出错了...");
+                }
+            }
+        });
+
+
+
         btnAgree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MySQLiteHelper helper = new MySQLiteHelper(CheckReserveActivity.this);
-                SQLiteDatabase writer = helper.getWritableDatabase();
 
-                int itemId = getIntent().getExtras().getInt("id");
-                ContentValues cv = new ContentValues();
-                cv.put("state",Constant.STATE_PASS);
-                writer.update("reserveInfo",cv,"_id=?",new String[]{""+itemId});
-                writer.close();
 
-                new AlertDialog.Builder(CheckReserveActivity.this)
-                        .setTitle("提醒")
-                        .setMessage("操作成功")
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                finish();
-                            }
-                        })
-                        .show();
+                info.setState(Constant.STATE_PASS);
+                info.update(info.getObjectId(), new UpdateListener() {
+                    @Override
+                    public void done(BmobException e) {
+                        if (e == null){
+                            new AlertDialog.Builder(CheckReserveActivity.this)
+                                    .setTitle("提醒")
+                                    .setMessage("操作成功")
+                                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            finish();
+                                        }
+                                    })
+                                    .show();
+                        }else {
+                            ToastUtil.showToast(CheckReserveActivity.this,"出错了...");
+                        }
+                    }
+                });
+
+
             }
         });
         btnReject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MySQLiteHelper helper = new MySQLiteHelper(CheckReserveActivity.this);
-                SQLiteDatabase writer = helper.getWritableDatabase();
+                info.setState(Constant.STATE_REJECTED);
+                info.update(info.getObjectId(), new UpdateListener() {
+                    @Override
+                    public void done(BmobException e) {
+                        if (e == null){
+                            new AlertDialog.Builder(CheckReserveActivity.this)
+                                    .setTitle("提醒")
+                                    .setMessage("操作成功")
+                                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            finish();
+                                        }
+                                    })
+                                    .show();
+                        }else {
+                            ToastUtil.showToast(CheckReserveActivity.this,"出错了...");
+                        }
+                    }
+                });
 
-                int itemId = getIntent().getExtras().getInt("id");
-                ContentValues cv = new ContentValues();
-                cv.put("state",Constant.STATE_REJECTED);
-                writer.update("reserveInfo",cv,"_id=?",new String[]{""+itemId});
-                writer.close();
 
-                new AlertDialog.Builder(CheckReserveActivity.this)
-                        .setTitle("提醒")
-                        .setMessage("操作成功")
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                finish();
-                            }
-                        })
-                        .show();
             }
         });
 

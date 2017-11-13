@@ -12,13 +12,6 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <ImageView
-                android:id="@+id/img"
-                android:src="@drawable/school"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:scaleType="fitCenter"
-                android:layout_weight="1"/>
 
             <TextView
                 android:id="@+id/tv_num"
@@ -36,6 +29,22 @@
                 android:textSize="16dp"
                 android:textColor="@color/black"
                 android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/tv_state"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:textSize="16dp"
+                android:textColor="@color/black"
+                android:gravity="center"/>
+            <ImageView
+                android:id="@+id/img"
+                android:src="@drawable/school"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:scaleType="fitCenter"
+                android:layout_weight="1"/>
 
         </LinearLayout>
 

@@ -30,6 +30,9 @@ import com.view.ActionBarView;
 
 import java.util.Calendar;
 
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SaveListener;
+
 public class CRReserveActivity extends AppCompatActivity {
 
     private ActionBarView actionBarView;
@@ -122,36 +125,33 @@ public class CRReserveActivity extends AppCompatActivity {
                 Log.v("教室预约",reason);
                 if (isTimeSel == 1 && CRNum!=-1 && !reason.equals("")){
 
-                    MySQLiteHelper helper = new MySQLiteHelper(CRReserveActivity.this);
-                    SQLiteDatabase writer = helper.getWritableDatabase();
-                    ContentValues cv = new ContentValues();
-                    cv.put("number",Integer.parseInt(etCRNum.getText().toString()));
-                    cv.put("time",time);
-                    cv.put("year",year_sel);
-                    cv.put("month",month_sel);
-                    cv.put("date",date_sel);
-                    cv.put("reason",reason);
-                    cv.put("email", PreferenceUtil.getData(CRReserveActivity.this,"userInfo","email"));
-                    cv.put("state", Constant.STATE_UNCHECKED);
-                    writer.insert("reserveinfo",null,cv);
-                    writer.close();
+                    ReserveInfo info = new ReserveInfo(CRNum,time,year_sel,month_sel,date_sel,reason
+                            ,PreferenceUtil.getData(CRReserveActivity.this,"userInfo","email"),Constant.STATE_UNCHECKED);
 
-                    new AlertDialog.Builder(CRReserveActivity.this)
-                            .setTitle("提醒")
-                            .setMessage("预约消息发送成功")
-                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    finish();
-                                }
-                            })
-                            .show();
+                    info.save(new SaveListener<String>() {
+                        @Override
+                        public void done(String s, BmobException e) {
+                            if (e == null){
+                                new AlertDialog.Builder(CRReserveActivity.this)
+                                        .setTitle("提醒")
+                                        .setMessage("预约消息发送成功")
+                                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                finish();
+                                            }
+                                        })
+                                        .show();
+                            }else{
+                                ToastUtil.showToast(CRReserveActivity.this,"出错了...");
+                            }
+                        }
+                    });
+
                 }else {
                     ToastUtil.showToast(CRReserveActivity.this,"请确认信息填写完整");
                 }
 
-//                ReserveInfo info = new ReserveInfo(Integer.parseInt(etCRNum.getText().toString())
-//                        ,time,year_sel,month_sel,date_sel,reason);
             }
         });
 

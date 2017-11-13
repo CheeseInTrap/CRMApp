@@ -4,61 +4,91 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.view.ActionBarView
+        android:id="@+id/action_bar"
+        android:gravity="center"
+        android:background="@color/style_color"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_height">
+    </com.view.ActionBarView>
+
+
+
+
 
     <TextView
-        android:id="@+id/Building"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:text="教学楼"/>
-
-    <EditText
-        android:id="@+id/Building_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:drawable/alert_light_frame"
-        android:hint="正心/诚意"
-        />
-
-    <TextView
-        android:id="@+id/Floor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="教室楼层"/>
 
     <EditText
-        android:id="@+id/Floor_text"
+        android:id="@+id/et_floor"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:drawable/alert_light_frame"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:hint="1~2"
         />
 
-    <TextView
-        android:id="@+id/Size"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="教室规模"/>
 
-    <EditText
-        android:id="@+id/Size_text"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:drawable/alert_light_frame"
-        android:hint="1~3"
-        />
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <RadioGroup
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RadioButton
+                android:id="@+id/rb_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="小"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/rb_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="中"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/rb_large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="大"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
 
     <Button
-        android:id="@+id/OK"
+        android:id="@+id/btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="确定"
         />
 
-    <TextView
-        android:id="@+id/show_data"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 </LinearLayout>
