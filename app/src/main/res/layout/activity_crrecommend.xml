@@ -1,80 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
 
     <com.view.ActionBarView
         android:id="@+id/action_bar"
-        android:gravity="center"
-        android:background="@color/style_color"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/actionbar_height">
-    </com.view.ActionBarView>
-
-
-
+        android:layout_height="@dimen/actionbar_height"
+        android:background="@color/style_color"
+        android:gravity="center"></com.view.ActionBarView>
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="教室楼层"/>
+
+        android:text="教室楼层" />
 
     <EditText
         android:id="@+id/et_floor"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:hint="1~2"
-        />
+        android:hint="1~2" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:text="教室规模"/>
+
+        android:text="教室规模" />
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
         <RadioGroup
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
             <RadioButton
                 android:id="@+id/rb_small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
             <TextView
-                android:text="小"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="小" />
+
             <RadioButton
                 android:id="@+id/rb_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
             <TextView
-                android:text="中"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="中" />
+
             <RadioButton
                 android:id="@+id/rb_large"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
             <TextView
-                android:text="大"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="大" />
 
         </RadioGroup>
 
@@ -82,13 +86,14 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="200dp"/>
+        android:layout_height="200dp" />
+
+    />
 
     <Button
         android:id="@+id/btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="确定"
-        />
+        android:text="确定" />
 
 </LinearLayout>

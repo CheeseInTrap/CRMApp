@@ -14,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.user.crmapp.R;
 import com.model.Constant;
@@ -31,6 +32,7 @@ import java.util.Random;
  */
 
 public class CRRecommendActivity extends AppCompatActivity {
+
 
     private EditText etFloor;
     private RadioButton rbSmall;
@@ -53,29 +55,29 @@ public class CRRecommendActivity extends AppCompatActivity {
         rbLarge = (RadioButton) findViewById(R.id.rb_large);
 
 
-
         findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int floor =0;
-                if (etFloor.getText().toString().equals("")){
-                    floor =0;
-                }else{
+
+                int floor = 0;
+                if (etFloor.getText().toString().equals("")) {
+                    floor = 0;
+                } else {
                     floor = Integer.parseInt(etFloor.getText().toString());
                 }
 
-                Intent intent = new Intent(CRRecommendActivity.this,CRRecresultActivity.class);
+                Intent intent = new Intent(CRRecommendActivity.this, CRRecresultActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putInt("floor",floor);
-                if (rbSmall.isChecked()){
-                    bundle.putInt("size",Constant.SIZE_SMALL);
-                }else if (rbMedium.isChecked()){
-                    bundle.putInt("size",Constant.SIZE_MEDIUM);
-                }else if (rbLarge.isChecked()){
-                    bundle.putInt("size",Constant.SIZE_LARGE);
-                }else{
+                bundle.putInt("floor", floor);
+                if (rbSmall.isChecked()) {
+                    bundle.putInt("size", Constant.SIZE_SMALL);
+                } else if (rbMedium.isChecked()) {
+                    bundle.putInt("size", Constant.SIZE_MEDIUM);
+                } else if (rbLarge.isChecked()) {
+                    bundle.putInt("size", Constant.SIZE_LARGE);
+                } else {
 
-                    bundle.putInt("size",-1);
+                    bundle.putInt("size", -1);
                 }
                 intent.putExtras(bundle);
                 startActivity(intent);
@@ -84,15 +86,15 @@ public class CRRecommendActivity extends AppCompatActivity {
         });
 
 
-
     }
 
-    public void initActionBarView(){
+    public void initActionBarView() {
         actionBarView = (ActionBarView) findViewById(R.id.action_bar);
         actionBarView.setOnBackClick(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+
             }
         });
     }

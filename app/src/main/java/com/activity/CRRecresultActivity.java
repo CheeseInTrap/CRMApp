@@ -12,22 +12,22 @@ import android.widget.TextView;
 
 import com.example.user.crmapp.R;
 import com.model.ClassRoom;
-import com.model.ReserveInfo;
 import com.util.ToastUtil;
 import com.view.ActionBarView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 
+
 /**
  * Created by asus on 2017/11/12.
  */
 
 public class CRRecresultActivity extends AppCompatActivity {
+
 
     private ActionBarView actionBarView;
     private RecyclerView rvCR;
@@ -168,7 +168,10 @@ public class CRRecresultActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+
             }
         });
     }
+
+
 }
