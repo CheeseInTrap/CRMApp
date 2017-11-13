@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.user.crmapp.R;
 import com.model.Constant;
@@ -67,44 +68,51 @@ public class CRRecommendActivity extends AppCompatActivity {
                 String Floor = FloorET.getText().toString();
                 EditText SizeET = (EditText) findViewById(R.id.Size_text);
                 String Size = SizeET.getText().toString();
+                if(Floor.equals("1")==false && Floor.equals("2")==false){
+                    Toast.makeText(getApplicationContext(),"楼层：1~2",Toast.LENGTH_SHORT).show();
+                }else{
+                    if(Size.equals("0")==false && Size.equals("1")==false){
+                        Toast.makeText(getApplicationContext(),"规模：0~1",Toast.LENGTH_SHORT).show();
+                    }else{
+                        //SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-                //SQLiteDatabase db = dbHelper.getWritableDatabase();
+                        SQLiteDatabase writer = helper.getWritableDatabase();
+                        Cursor cursor = writer.query("classroom", null, "floor = ? and size = ?", new String[]{Floor, Size}, null, null, null);
+                        ArrayList<Integer> Snum = new ArrayList<Integer>();
+                        ArrayList<Integer> Sstate12 = new ArrayList<Integer>();
+                        ArrayList<Integer> Sstate34 = new ArrayList<Integer>();
+                        ArrayList<Integer> Sstate56 = new ArrayList<Integer>();
+                        ArrayList<Integer> Sstate78 = new ArrayList<Integer>();
+                        ArrayList<Integer> Sstate910 = new ArrayList<Integer>();
+                        if (cursor.moveToFirst()) {
+                            do {
+                                int number = cursor.getInt(cursor.getColumnIndex("number"));
+                                int state12 = cursor.getInt(cursor.getColumnIndex("state12"));
+                                int state34 = cursor.getInt(cursor.getColumnIndex("state34"));
+                                int state56 = cursor.getInt(cursor.getColumnIndex("state56"));
+                                int state78 = cursor.getInt(cursor.getColumnIndex("state78"));
+                                int state910 = cursor.getInt(cursor.getColumnIndex("state910"));
+                                Snum.add(number);
+                                Sstate12.add(state12);
+                                Sstate34.add(state34);
+                                Sstate56.add(state56);
+                                Sstate78.add(state78);
+                                Sstate910.add(state910);
+                            } while (cursor.moveToNext());
+                        }
+                        cursor.close();
 
-                SQLiteDatabase writer = helper.getWritableDatabase();
-                Cursor cursor = writer.query("classroom", null, "floor = ? and size = ?", new String[]{Floor, Size}, null, null, null);
-                ArrayList<String> Snum = new ArrayList<String>();
-                ArrayList<String> Sstate12 = new ArrayList<String>();
-                ArrayList<String> Sstate34 = new ArrayList<String>();
-                ArrayList<String> Sstate56 = new ArrayList<String>();
-                ArrayList<String> Sstate78 = new ArrayList<String>();
-                ArrayList<String> Sstate910 = new ArrayList<String>();
-                if (cursor.moveToFirst()) {
-                    do {
-                        int number = cursor.getInt(cursor.getColumnIndex("number"));
-                        int state12 = cursor.getInt(cursor.getColumnIndex("state12"));
-                        int state34 = cursor.getInt(cursor.getColumnIndex("state34"));
-                        int state56 = cursor.getInt(cursor.getColumnIndex("state56"));
-                        int state78 = cursor.getInt(cursor.getColumnIndex("state78"));
-                        int state910 = cursor.getInt(cursor.getColumnIndex("state910"));
-                        Snum.add(number+"");
-                        Sstate12.add(state12+"");
-                        Sstate34.add(state34+"");
-                        Sstate56.add(state56+"");
-                        Sstate78.add(state78+"");
-                        Sstate910.add(state910+"");
-                    } while (cursor.moveToNext());
+                        Intent intent = new Intent(CRRecommendActivity.this, CRRecresultActivity.class);
+                        intent.putExtra("Snum", Snum);
+                        intent.putExtra("Sstate12", Sstate12);
+                        intent.putExtra("Sstate34", Sstate34);
+                        intent.putExtra("Sstate56", Sstate56);
+                        intent.putExtra("Sstate78", Sstate78);
+                        intent.putExtra("Sstate910", Sstate910);
+
+                        startActivity(intent);
+                    }
                 }
-                cursor.close();
-
-                Intent intent = new Intent(CRRecommendActivity.this, CRQueryActivity.class);
-                intent.putExtra("Snum", Snum);
-                intent.putExtra("Sstate12", Sstate12);
-                intent.putExtra("Sstate34", Sstate34);
-                intent.putExtra("Sstate56", Sstate56);
-                intent.putExtra("Sstate78", Sstate78);
-                intent.putExtra("Sstate910", Sstate910);
-
-                startActivity(intent);
             }
         });
     }
