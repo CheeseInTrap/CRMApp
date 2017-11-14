@@ -16,6 +16,7 @@ import com.model.Constant;
 import com.model.ReserveInfo;
 import com.util.ToastUtil;
 import com.util.db.MySQLiteHelper;
+import com.view.ActionBarView;
 
 import java.util.List;
 
@@ -34,6 +35,11 @@ public class CheckReserveActivity extends AppCompatActivity {
     private Button btnAgree;
     private Button btnReject;
 
+    private TextView tv;
+
+    private ActionBarView actionBarView;
+
+
     private static ReserveInfo info;
 
 
@@ -41,6 +47,7 @@ public class CheckReserveActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reserve_check);
+        initActionBarView();
 
         tvNum = (TextView) findViewById(R.id.tv_num);
         tvTime = (TextView) findViewById(R.id.tv_time);
@@ -49,6 +56,8 @@ public class CheckReserveActivity extends AppCompatActivity {
 
         btnAgree = (Button) findViewById(R.id.btn_agree);
         btnReject = (Button) findViewById(R.id.btn_reject);
+
+        tv = (TextView) findViewById(R.id.tv);
 
         Bundle bundle = getIntent().getExtras();
 
@@ -89,7 +98,9 @@ public class CheckReserveActivity extends AppCompatActivity {
                         case Constant.STATE_PASS:
                             state = state + "通过";
                             btnAgree.setVisibility(View.INVISIBLE);
-                            btnReject.setVisibility(View.VISIBLE);
+                            btnReject.setVisibility(View.INVISIBLE);
+                            tv.setVisibility(View.VISIBLE);
+                            tv.setText("已通过");
                             break;
                         case Constant.STATE_UNCHECKED:
                             state = state + "待审核";
@@ -97,7 +108,9 @@ public class CheckReserveActivity extends AppCompatActivity {
                         case Constant.STATE_REJECTED:
                             state = state + "未通过";
                             btnAgree.setVisibility(View.INVISIBLE);
-                            btnReject.setVisibility(View.VISIBLE);
+                            btnReject.setVisibility(View.INVISIBLE);
+                            tv.setVisibility(View.VISIBLE);
+                            tv.setText("已拒绝");
                             break;
                         default:
                             break;
@@ -257,5 +270,17 @@ public class CheckReserveActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    public void initActionBarView(){
+        actionBarView = (ActionBarView) findViewById(R.id.action_bar);
+        actionBarView.setOnBackClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        actionBarView.setTitle("预约信息");
     }
 }

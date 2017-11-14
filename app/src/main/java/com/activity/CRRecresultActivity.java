@@ -8,10 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.user.crmapp.R;
 import com.model.ClassRoom;
+import com.model.Constant;
 import com.util.ToastUtil;
 import com.view.ActionBarView;
 
@@ -74,25 +76,42 @@ public class CRRecresultActivity extends AppCompatActivity {
                             ClassRoom cr = list.get(position);
 
                             vh.getTvNum().setText("" + cr.getNumber());
+
+                            int color = 0;
+                            switch (cr.getSize()){
+                                case Constant.SIZE_SMALL:
+                                    color = R.color.color_2;
+                                    break;
+                                case Constant.SIZE_MEDIUM:
+                                    color = R.color.color_4;
+                                    break;
+                                case Constant.SIZE_LARGE:
+                                    color = R.color.color_3;
+                                    break;
+                                default:
+                                    break;
+                            }
+                            vh.getTvNum().setBackgroundResource(color);
+
                             if (cr.getState12() == ClassRoom.OCCUPIED) {
 
-                                vh.getImbtn12().setImageResource(android.R.drawable.ic_input_add);
+                                vh.getImbtn12().setImageResource(R.color.main_5);
                             }
                             if (cr.getState34() == ClassRoom.OCCUPIED) {
 
-                                vh.getImbtn34().setImageResource(android.R.drawable.ic_input_add);
+                                vh.getImbtn34().setImageResource(R.color.main_5);
                             }
                             if (cr.getState56() == ClassRoom.OCCUPIED) {
 
-                                vh.getImbtn56().setImageResource(android.R.drawable.ic_input_add);
+                                vh.getImbtn56().setImageResource(R.color.main_5);
                             }
                             if (cr.getState78() == ClassRoom.OCCUPIED) {
 
-                                vh.getImbtn78().setImageResource(android.R.drawable.ic_input_add);
+                                vh.getImbtn78().setImageResource(R.color.main_5);
                             }
                             if (cr.getState910() == ClassRoom.OCCUPIED) {
 
-                                vh.getImbtn910().setImageResource(android.R.drawable.ic_input_add);
+                                vh.getImbtn910().setImageResource(R.color.main_5);
                             }
                         }
 
@@ -118,11 +137,11 @@ public class CRRecresultActivity extends AppCompatActivity {
 
 
         private TextView tvNum;
-        private ImageButton imbtn12;
-        private ImageButton imbtn34;
-        private ImageButton imbtn56;
-        private ImageButton imbtn78;
-        private ImageButton imbtn910;
+        private ImageView imbtn12;
+        private ImageView imbtn34;
+        private ImageView imbtn56;
+        private ImageView imbtn78;
+        private ImageView imbtn910;
 
 
         public ViewHolder(View itemView) {
@@ -130,34 +149,34 @@ public class CRRecresultActivity extends AppCompatActivity {
 
 
             tvNum = (TextView) itemView.findViewById(R.id.tvNum);
-            imbtn12 = (ImageButton) itemView.findViewById(R.id.imbtn_12);
-            imbtn34 = (ImageButton) itemView.findViewById(R.id.imbtn_34);
-            imbtn56 = (ImageButton) itemView.findViewById(R.id.imbtn_56);
-            imbtn78 = (ImageButton) itemView.findViewById(R.id.imbtn_78);
-            imbtn910 = (ImageButton) itemView.findViewById(R.id.imbtn_910);
+            imbtn12 = (ImageView) itemView.findViewById(R.id.imbtn_12);
+            imbtn34 = (ImageView) itemView.findViewById(R.id.imbtn_34);
+            imbtn56 = (ImageView) itemView.findViewById(R.id.imbtn_56);
+            imbtn78 = (ImageView) itemView.findViewById(R.id.imbtn_78);
+            imbtn910 = (ImageView) itemView.findViewById(R.id.imbtn_910);
         }
 
         public TextView getTvNum() {
             return tvNum;
         }
 
-        public ImageButton getImbtn12() {
+        public ImageView getImbtn12() {
             return imbtn12;
         }
 
-        public ImageButton getImbtn34() {
+        public ImageView getImbtn34() {
             return imbtn34;
         }
 
-        public ImageButton getImbtn56() {
+        public ImageView getImbtn56() {
             return imbtn56;
         }
 
-        public ImageButton getImbtn78() {
+        public ImageView getImbtn78() {
             return imbtn78;
         }
 
-        public ImageButton getImbtn910() {
+        public ImageView getImbtn910() {
             return imbtn910;
         }
     }

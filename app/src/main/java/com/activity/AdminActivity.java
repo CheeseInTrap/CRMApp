@@ -93,7 +93,7 @@ public class AdminActivity extends AppCompatActivity {
     public void initActionBarView(){
         actionBarView = (ActionBarView) findViewById(R.id.action_bar);
 
-        actionBarView.setTitle("预约信息");
+        actionBarView.setTitle("预约信息（管理员模式）");
         actionBarView.setOnMoreClick(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
