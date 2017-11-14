@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/style_light"
+    tools:context="com.activity.CRRecommendActivity">
 
 
     <com.view.ActionBarView
@@ -13,30 +17,42 @@
         android:gravity="center"></com.view.ActionBarView>
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/ll_bg"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+        <TextView
+            android:text="教室楼层"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"/>
+        <View
+            android:layout_width="10dp"
+            android:layout_height="match_parent"/>
+        <EditText
+            android:id="@+id/et_floor"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/edit"
+            android:ems="10"
+            android:gravity="center_vertical" />
+    </LinearLayout>
 
-        android:text="教室楼层" />
 
-    <EditText
-        android:id="@+id/et_floor"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:hint="1~2" />
+    <View
+    android:layout_width="match_parent"
+    android:layout_height="20dp"/>
+
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-
-        android:text="教室规模" />
+        android:layout_height="10dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,9 +62,17 @@
         android:orientation="horizontal">
 
         <RadioGroup
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
+
+            <TextView
+                android:text="教室规模"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"/>
 
             <RadioButton
                 android:id="@+id/rb_small"
@@ -90,10 +114,24 @@
 
     />
 
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+
     <Button
         android:id="@+id/btn"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="确定" />
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/btn"
+        android:text="submit"
+        android:textColor="@color/white"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
 
 </LinearLayout>
