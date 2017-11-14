@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/style_light"
     tools:context="com.activity.ReserveDetailActivity">
 
     <com.view.ActionBarView
@@ -18,8 +19,10 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="50dp"
+        android:gravity="center_horizontal"
+        >
+
         <TextView
             android:text="预约教室号"
             android:layout_width="100dp"
@@ -35,11 +38,17 @@
             android:gravity="center"/>
     </LinearLayout>
 
+    <View
+
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="50dp"
+        >
         <TextView
             android:text="预约时间"
             android:layout_width="100dp"
@@ -55,11 +64,16 @@
             android:gravity="center"/>
     </LinearLayout>
 
+    <View
+
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="50dp"
+        >
         <TextView
             android:text="预约日期"
             android:layout_width="100dp"
@@ -75,16 +89,24 @@
             android:gravity="center"/>
     </LinearLayout>
 
+    <View
+
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="70dp"
+        >
+
         <TextView
-            android:text="预约理由"
+            android:id="@+id/textView"
             android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:text="预约理由" />
+
         <View
             android:layout_width="10dp"
             android:layout_height="match_parent"/>
@@ -95,11 +117,16 @@
             android:gravity="center"/>
     </LinearLayout>
 
+    <View
+
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="50dp"
+        >
         <TextView
             android:text="状态"
             android:layout_width="100dp"
