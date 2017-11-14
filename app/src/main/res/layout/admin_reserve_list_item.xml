@@ -39,7 +39,6 @@
                 android:gravity="center"/>
             <ImageView
                 android:id="@+id/img1"
-                android:src="@drawable/school"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:scaleType="fitCenter"

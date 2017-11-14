@@ -21,6 +21,10 @@ public class ClassRoom extends BmobObject{
 
     public static final int OCCUPIED =1;
 
+    public ClassRoom(){
+
+    }
+
 
     public ClassRoom(int number,int size,int floor,int state12,int state34,int state56,int state78,int state910) {
         this.number = number;

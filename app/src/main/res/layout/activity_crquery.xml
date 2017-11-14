@@ -18,7 +18,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:layout_margin="2dp">
         <TextView
             android:text="教室号"
             android:layout_width="100dp"
