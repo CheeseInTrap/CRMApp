@@ -77,17 +77,17 @@ public class ReserveInfoActivity extends AppCompatActivity {
                                 case Constant.STATE_PASS:
                                     img.setImageResource(R.drawable.pass);
                                     tvState.setText("通过");
-                                    color = R.color.color_2;
+                                    color = R.color.main_3;
                                     break;
                                 case Constant.STATE_UNCHECKED:
-                                    img.setImageResource(R.drawable.wait);
+                                    img.setImageResource(R.drawable.feedback_fill);
                                     tvState.setText("待审核");
-                                    color = R.color.color_4;
+                                    color = R.color.main_2;
                                     break;
                                 case Constant.STATE_REJECTED:
                                     img.setImageResource(R.drawable.reject);
                                     tvState.setText("未通过");
-                                    color = R.color.color_3;
+                                    color = R.color.main_1;
                                     break;
                                 default:
                                     break;
@@ -169,6 +169,7 @@ public class ReserveInfoActivity extends AppCompatActivity {
         actionBarView.setOnBackClick(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
 
             }
         });

@@ -44,7 +44,6 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        initActionBarView();
         //点击注册后从页面获取用户名和密码并存入数据库
         //跳回登录界面
         findViewById(R.id.btnRegister).setOnClickListener(new View.OnClickListener() {
@@ -116,13 +115,5 @@ public class RegisterActivity extends AppCompatActivity {
         return m.matches();
     }
 
-    public void initActionBarView(){
-        actionBarView = (ActionBarView) findViewById(R.id.action_bar);
-        actionBarView.setOnBackClick(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-    }
+
 }

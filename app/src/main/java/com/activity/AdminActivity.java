@@ -45,131 +45,35 @@ public class AdminActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin);
         initActionBarView();
 
-
-
-        BmobQuery<ReserveInfo> query = new BmobQuery<>();
         rv = (RecyclerView) findViewById(R.id.rv);
         rv.setLayoutManager(new LinearLayoutManager(this));
-
-        query.findObjects(new FindListener<ReserveInfo>() {
-            @Override
-            public void done(List<ReserveInfo> list, BmobException e) {
-
-                if (e == null){
-                    infos = list;
-                    adapter = new RecyclerView.Adapter() {
-                        @Override
-                        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                            return new ViewHolder(LayoutInflater.from(AdminActivity.this).inflate(
-                                    R.layout.admin_reserve_list_item,null,false));
-                        }
-
-                        @Override
-                        public void onBindViewHolder(RecyclerView.ViewHolder holder,final int position) {
-
-
-                            ViewHolder vh = (ViewHolder) holder;
-                            ReserveInfo info = infos.get(position);
-                            ImageView img = vh.getImg();
-                            TextView tvNum = vh.getTvNum();
-                            TextView tvTime = vh.getTvTime();
-                            TextView tvState = vh.getTvState();
-                            tvNum.setText(info.getNumber()+"");
-                            tvTime.setText(""+info.getYear()+"-"+info.getMonth()+"-"+info.getDate());
-
-
-                            int color = 0;
-                            switch (info.getState()){
-                                case Constant.STATE_PASS:
-                                    img.setImageResource(R.drawable.pass);
-                                    tvState.setText("通过");
-                                    color = R.color.color_2;
-                                    break;
-                                case Constant.STATE_UNCHECKED:
-                                    img.setImageResource(R.drawable.wait);
-                                    tvState.setText("待审核");
-                                    color = R.color.color_4;
-                                    break;
-                                case Constant.STATE_REJECTED:
-                                    img.setImageResource(R.drawable.reject);
-                                    tvState.setText("未通过");
-                                    color = R.color.color_3;
-                                    break;
-                                default:
-                                    break;
-                            }
-                            tvNum.setText(""+info.getNumber());
-                            tvTime.setText(""+info.getYear()+"-"+info.getMonth()+"-"+info.getDate());
-
-                            img.setBackgroundResource(color);
-                            tvNum.setBackgroundResource(color);
-                            tvTime.setBackgroundResource(color);
-                            tvNum.setBackgroundResource(color);
-                            tvState.setBackgroundResource(color);
-
-                            img.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    ReserveInfo reserveInfo = new ReserveInfo();
-                                    reserveInfo.setObjectId(infos.get(position).getObjectId());
-                                    reserveInfo.delete(new UpdateListener() {
-                                        @Override
-                                        public void done(BmobException e) {
-                                            if (e == null){
-                                                new AlertDialog.Builder(AdminActivity.this)
-                                                        .setTitle("提醒")
-                                                        .setMessage("删除成功")
-                                                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                                            @Override
-                                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                                finish();
-                                                            }
-                                                        })
-                                                        .show();
-                                            }else{
-                                                ToastUtil.showToast(AdminActivity.this,"删除失败");
-                                            }
-                                        }
-                                    });
-                                }
-                            });
-
-                        }
-
-                        @Override
-                        public int getItemCount() {
-                            return infos.size();
-                        }
-                    };
-                    rv.setAdapter(adapter);
-                }else {
-                    ToastUtil.showToast(AdminActivity.this,"出错了...");
-                }
-            }
-        });
-
-
 
     }
 
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        private ImageView img;
+        private ImageView img1;
+        private ImageView img2;
         private TextView tvNum;
         private TextView tvTime;
         private TextView tvState;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            img = (ImageView) itemView.findViewById(R.id.img);
+            img1 = (ImageView) itemView.findViewById(R.id.img1);
+            img2 = (ImageView) itemView.findViewById(R.id.img2);
             tvNum = (TextView) itemView.findViewById(R.id.tv_num);
             tvTime = (TextView) itemView.findViewById(R.id.tv_time);
             tvState = (TextView) itemView.findViewById(R.id.tv_state);
         }
 
-        public ImageView getImg() {
-            return img;
+        public ImageView getImg1() {
+            return img1;
+        }
+
+        public ImageView getImg2() {
+            return img2;
         }
 
         public TextView getTvNum() {
@@ -221,16 +125,101 @@ public class AdminActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         BmobQuery<ReserveInfo> query = new BmobQuery<>();
         query.findObjects(new FindListener<ReserveInfo>() {
             @Override
             public void done(List<ReserveInfo> list, BmobException e) {
 
                 if (e == null){
-                    infos=list;
-                    adapter.notifyDataSetChanged();
+                    infos = list;
+                    adapter = new RecyclerView.Adapter() {
+                        @Override
+                        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                            return new ViewHolder(LayoutInflater.from(AdminActivity.this).inflate(
+                                    R.layout.admin_reserve_list_item,null,false));
+                        }
 
+                        @Override
+                        public void onBindViewHolder(RecyclerView.ViewHolder holder,final int position) {
+
+
+                            ViewHolder vh = (ViewHolder) holder;
+                            ReserveInfo info = infos.get(position);
+                            ImageView img1 = vh.getImg1();
+                            ImageView img2 = vh.getImg2();
+                            TextView tvNum = vh.getTvNum();
+                            TextView tvTime = vh.getTvTime();
+                            TextView tvState = vh.getTvState();
+                            tvNum.setText(info.getNumber()+"");
+                            tvTime.setText(""+info.getYear()+"-"+info.getMonth()+"-"+info.getDate());
+
+
+                            int color = 0;
+                            switch (info.getState()){
+                                case Constant.STATE_PASS:
+                                    img1.setImageResource(R.drawable.pass);
+                                    tvState.setText("通过");
+                                    color = R.color.main_3;
+                                    break;
+                                case Constant.STATE_UNCHECKED:
+                                    img1.setImageResource(R.drawable.feedback_fill);
+                                    tvState.setText("待审核");
+                                    color = R.color.main_2;
+                                    break;
+                                case Constant.STATE_REJECTED:
+                                    img1.setImageResource(R.drawable.reject);
+                                    tvState.setText("未通过");
+                                    color = R.color.main_1;
+                                    break;
+                                default:
+                                    break;
+                            }
+                            tvNum.setText(""+info.getNumber());
+                            tvTime.setText(""+info.getYear()+"-"+info.getMonth()+"-"+info.getDate());
+
+                            img1.setBackgroundResource(color);
+                            img2.setBackgroundResource(color);
+                            tvNum.setBackgroundResource(color);
+                            tvTime.setBackgroundResource(color);
+                            tvNum.setBackgroundResource(color);
+                            tvState.setBackgroundResource(color);
+
+                            img2.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    ReserveInfo reserveInfo = new ReserveInfo();
+                                    reserveInfo.setObjectId(infos.get(position).getObjectId());
+                                    reserveInfo.delete(new UpdateListener() {
+                                        @Override
+                                        public void done(BmobException e) {
+                                            if (e == null){
+                                                new AlertDialog.Builder(AdminActivity.this)
+                                                        .setTitle("提醒")
+                                                        .setMessage("删除成功")
+                                                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                                finish();
+                                                            }
+                                                        })
+                                                        .show();
+                                                onResume();
+                                            }else{
+                                                ToastUtil.showToast(AdminActivity.this,"删除失败");
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+
+                        }
+
+                        @Override
+                        public int getItemCount() {
+                            return infos.size();
+                        }
+                    };
+                    rv.setAdapter(adapter);
                 }else {
                     ToastUtil.showToast(AdminActivity.this,"出错了...");
                 }
