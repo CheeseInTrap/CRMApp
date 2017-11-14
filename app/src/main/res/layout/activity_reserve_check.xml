@@ -106,7 +106,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:text="同意"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@drawable/btn"/>
         <View
             android:layout_width="10dp"
             android:layout_height="match_parent"/>
@@ -116,7 +117,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:text="拒绝"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@drawable/btn"/>
     </LinearLayout>
 
 

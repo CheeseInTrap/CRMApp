@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.user.crmapp.R;
+import com.model.ClassRoom;
 import com.model.Constant;
 import com.model.ReserveInfo;
 import com.util.ToastUtil;
@@ -56,11 +57,11 @@ public class CheckReserveActivity extends AppCompatActivity {
         query.getObject(id, new QueryListener<ReserveInfo>() {
             @Override
             public void done(ReserveInfo reserveInfo, BmobException e) {
-                if (e == null){
+                if (e == null) {
                     info = reserveInfo;
-                    tvNum.setText(""+info.getNumber());
+                    tvNum.setText("" + info.getNumber());
                     String time = "";
-                    switch (info.getTime()){
+                    switch (info.getTime()) {
                         case 0:
                             time = time + "1-2节";
                             break;
@@ -81,56 +82,149 @@ public class CheckReserveActivity extends AppCompatActivity {
 
                     }
                     tvTime.setText(time);
-                    tvDate.setText(info.getYear()+"-"+(info.getMonth()+1)+"-"+info.getDate());
+                    tvDate.setText(info.getYear() + "-" + (info.getMonth() + 1) + "-" + info.getDate());
                     tvReason.setText(info.getReason());
-                    String state="";
-                    switch (info.getState()){
+                    String state = "";
+                    switch (info.getState()) {
                         case Constant.STATE_PASS:
-                            state = state+"通过";
+                            state = state + "通过";
+                            btnAgree.setVisibility(View.INVISIBLE);
+                            btnReject.setVisibility(View.VISIBLE);
                             break;
                         case Constant.STATE_UNCHECKED:
-                            state = state+"待审核";
+                            state = state + "待审核";
                             break;
                         case Constant.STATE_REJECTED:
-                            state = state+"未通过";
+                            state = state + "未通过";
+                            btnAgree.setVisibility(View.INVISIBLE);
+                            btnReject.setVisibility(View.VISIBLE);
                             break;
                         default:
                             break;
                     }
 
-                }else {
-                    ToastUtil.showToast(CheckReserveActivity.this,"出错了...");
+                } else {
+                    ToastUtil.showToast(CheckReserveActivity.this, "出错了...");
                 }
             }
         });
-
 
 
         btnAgree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
-                info.setState(Constant.STATE_PASS);
-                info.update(info.getObjectId(), new UpdateListener() {
+                BmobQuery<ClassRoom> query = new BmobQuery<ClassRoom>();
+                query.addWhereEqualTo("number", Integer.parseInt(tvNum.getText().toString()));
+                query.findObjects(new FindListener<ClassRoom>() {
                     @Override
-                    public void done(BmobException e) {
-                        if (e == null){
-                            new AlertDialog.Builder(CheckReserveActivity.this)
-                                    .setTitle("提醒")
-                                    .setMessage("操作成功")
-                                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            finish();
+                    public void done(List<ClassRoom> list, BmobException e) {
+                        if (e == null) {
+                            ClassRoom classRoom = list.get(0);
+
+                            boolean isOccupied = false;
+
+                            switch (info.getTime()) {
+                                case 0:
+                                    if (classRoom.getState12() == ClassRoom.OCCUPIED) {
+                                        isOccupied = true;
+                                    }
+                                    break;
+                                case 1:
+                                    if (classRoom.getState34() == ClassRoom.OCCUPIED) {
+                                        isOccupied = true;
+                                    }
+                                    break;
+                                case 2:
+                                    if (classRoom.getState56() == ClassRoom.OCCUPIED) {
+                                        isOccupied = true;
+                                    }
+                                    break;
+                                case 3:
+                                    if (classRoom.getState78() == ClassRoom.OCCUPIED) {
+                                        isOccupied = true;
+                                    }
+                                    break;
+                                case 4:
+                                    if (classRoom.getState910() == ClassRoom.OCCUPIED) {
+                                        isOccupied = true;
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                            if (isOccupied) {
+                                new AlertDialog.Builder(CheckReserveActivity.this)
+                                        .setTitle("提醒")
+                                        .setMessage("该教室已被占用")
+                                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                            }
+                                        })
+                                        .show();
+
+                            } else {
+                                switch (info.getTime()) {
+                                    case 0:
+                                        classRoom.setState12(ClassRoom.OCCUPIED);
+                                        break;
+                                    case 1:
+                                        classRoom.setState34(ClassRoom.OCCUPIED);
+                                        break;
+                                    case 2:
+                                        classRoom.setState56(ClassRoom.OCCUPIED);
+                                        break;
+                                    case 3:
+                                        classRoom.setState78(ClassRoom.OCCUPIED);
+                                        break;
+                                    case 4:
+                                        classRoom.setState910(ClassRoom.OCCUPIED);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                classRoom.update(classRoom.getObjectId(), new UpdateListener() {
+                                    @Override
+                                    public void done(BmobException e) {
+                                        if (e == null){
+                                            info.setState(Constant.STATE_PASS);
+                                            info.update(info.getObjectId(), new UpdateListener() {
+                                                @Override
+                                                public void done(BmobException e) {
+                                                    if (e == null) {
+                                                        new AlertDialog.Builder(CheckReserveActivity.this)
+                                                                .setTitle("提醒")
+                                                                .setMessage("操作成功")
+                                                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                                                    @Override
+                                                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                                                        finish();
+                                                                    }
+                                                                })
+                                                                .show();
+                                                    } else {
+                                                        ToastUtil.showToast(CheckReserveActivity.this, "出错了...");
+                                                    }
+                                                }
+                                            });
+                                        }else{
+                                            ToastUtil.showToast(CheckReserveActivity.this, "出错了...");
+
                                         }
-                                    })
-                                    .show();
-                        }else {
-                            ToastUtil.showToast(CheckReserveActivity.this,"出错了...");
+
+                                    }
+                                });
+
+
+                            }
+                        } else {
+                            ToastUtil.showToast(CheckReserveActivity.this, "出错了");
                         }
                     }
                 });
+
+
 
 
             }
@@ -142,7 +236,7 @@ public class CheckReserveActivity extends AppCompatActivity {
                 info.update(info.getObjectId(), new UpdateListener() {
                     @Override
                     public void done(BmobException e) {
-                        if (e == null){
+                        if (e == null) {
                             new AlertDialog.Builder(CheckReserveActivity.this)
                                     .setTitle("提醒")
                                     .setMessage("操作成功")
@@ -153,8 +247,8 @@ public class CheckReserveActivity extends AppCompatActivity {
                                         }
                                     })
                                     .show();
-                        }else {
-                            ToastUtil.showToast(CheckReserveActivity.this,"出错了...");
+                        } else {
+                            ToastUtil.showToast(CheckReserveActivity.this, "出错了...");
                         }
                     }
                 });
