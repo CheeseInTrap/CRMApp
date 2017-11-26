@@ -7,7 +7,7 @@ import cn.bmob.v3.BmobObject;
  * 作者 ： Created by zjr on 2017/11/10 16:17.
  */
 
-public class ClassRoom extends BmobObject{
+public class ClassRoom extends BmobObject {
 
     private int number;
     private int building;
@@ -18,15 +18,16 @@ public class ClassRoom extends BmobObject{
     private int state56;
     private int state78;
     private int state910;
+    private int date;
 
-    public static final int OCCUPIED =1;
+    public static final int OCCUPIED = 1;
 
-    public ClassRoom(){
+    public ClassRoom() {
 
     }
 
 
-    public ClassRoom(int number,int size,int floor,int state12,int state34,int state56,int state78,int state910) {
+    public ClassRoom(int number, int building, int size, int floor, int state12, int state34, int state56, int state78, int state910, int date) {
         this.number = number;
         this.size = size;
         this.floor = floor;
@@ -35,9 +36,11 @@ public class ClassRoom extends BmobObject{
         this.state56 = state56;
         this.state78 = state78;
         this.state910 = state910;
-        this.building = 0;
+        this.building = building;
+        this.date = date;
     }
-    public ClassRoom(int number,int building,int size,int floor,int state12,int state34,int state56,int state78,int state910) {
+
+    public ClassRoom(int number, int building, int size, int floor, int state12, int state34, int state56, int state78, int state910) {
         this.number = number;
         this.size = size;
         this.floor = floor;
@@ -85,6 +88,10 @@ public class ClassRoom extends BmobObject{
         return state910;
     }
 
+    public int getDate() {
+        return date;
+    }
+
     public void setBuilding(int building) {
         this.building = building;
     }
@@ -108,5 +115,4 @@ public class ClassRoom extends BmobObject{
     public void setState910(int state910) {
         this.state910 = state910;
     }
-
 }

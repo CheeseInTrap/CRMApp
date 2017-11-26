@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.user.crmapp.R;
@@ -138,4 +140,28 @@ public class MapActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
     }
+
+
+    private ArrayList<MyOnTouchListener> onTouchListeners = new ArrayList<MyOnTouchListener>(
+            10);
+    public interface MyOnTouchListener {
+        public boolean onTouch(MotionEvent ev);
+    }
+        @Override
+        public boolean dispatchTouchEvent(MotionEvent ev) {
+            for (MyOnTouchListener listener : onTouchListeners) {
+                if(listener != null) {
+                    listener.onTouch(ev);
+                }
+            }
+            return super.dispatchTouchEvent(ev);
+        }
+        public void registerMyOnTouchListener(MyOnTouchListener myOnTouchListener) {
+            onTouchListeners.add(myOnTouchListener);
+        }
+        public void unregisterMyOnTouchListener(MyOnTouchListener myOnTouchListener) {
+            onTouchListeners.remove(myOnTouchListener) ;
+        }
+
+
 }

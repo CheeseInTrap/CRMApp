@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.user.crmapp.R;
+import com.model.Constant;
 import com.model.ReserveInfo;
 import com.util.PreferenceUtil;
 import com.util.ToastUtil;
@@ -238,7 +239,10 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(this, MapActivity.class);
                 break;
             case 1:
+                Bundle bundle = new Bundle();
+                bundle.putInt(Constant.Type,Constant.BUILD_ZX);
                 intent = new Intent(this, CRQueryActivity.class);
+                intent.putExtras(bundle);
                 break;
             case 2:
                 intent = new Intent(this, CRReserveActivity.class);

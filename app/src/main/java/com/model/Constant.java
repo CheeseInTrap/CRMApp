@@ -26,6 +26,12 @@ public class Constant {
     public static final int SIZE_MEDIUM = 1;
     public static final int SIZE_LARGE = 2;
 
+    public static final int BUILD_ZX = 0;
+    public static final int BUILD_ZZ = 1;
+    public static final int BUILD_CY = 2;
+
+    public static final String Type = "building_type";
+
 
 
 }

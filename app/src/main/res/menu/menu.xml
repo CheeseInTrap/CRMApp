@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item android:id="@+id/zx"
+            android:title="正心"/>
+        <item android:id="@+id/zz"
+            android:title="致知"/>
+        <item android:id="@+id/cy"
+            android:title="诚意"/>
+    </group>
+
+</menu>

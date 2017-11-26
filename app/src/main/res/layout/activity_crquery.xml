@@ -15,6 +15,31 @@
         android:layout_height="@dimen/actionbar_height">
     </com.view.ActionBarView>
 
+    <RadioGroup
+        android:id="@+id/group"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <RadioButton
+            android:id="@+id/date1"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="今天"/>
+        <RadioButton
+            android:id="@+id/date2"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="明天"/>
+        <RadioButton
+            android:id="@+id/date3"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="后天"/>
+    </RadioGroup>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
