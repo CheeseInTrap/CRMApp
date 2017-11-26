@@ -21,6 +21,7 @@ import com.util.ToastUtil;
 import com.view.ActionBarView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
@@ -92,8 +93,9 @@ public class ReserveInfoActivity extends AppCompatActivity {
                                 default:
                                     break;
                             }
+                            Calendar calendar = Calendar.getInstance();
                             tvNum.setText(""+info.getNumber());
-                            tvTime.setText(""+info.getYear()+"-"+info.getMonth()+"-"+info.getDate());
+                            tvTime.setText(""+calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+(calendar.get(Calendar.DATE)+info.getDate()));
 
                             img.setBackgroundResource(color);
                             tvNum.setBackgroundResource(color);

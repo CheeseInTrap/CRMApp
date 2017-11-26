@@ -1,8 +1,7 @@
 package com.activity;
 
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +11,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -197,7 +195,7 @@ public class CRQueryActivity extends AppCompatActivity {
         return true;
     }
 
-    private void setSituation(int buildType, int date) {
+    private void setSituation(final int buildType, int date) {
         BmobQuery<ClassRoom> query = new BmobQuery<>();
         query.addWhereEqualTo("building", buildType);
         query.addWhereEqualTo("date", date);
@@ -215,7 +213,7 @@ public class CRQueryActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+                        public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
                             ViewHolder vh = (ViewHolder) holder;
                             ClassRoom cr = list.get(position);
 
@@ -237,25 +235,89 @@ public class CRQueryActivity extends AppCompatActivity {
                             vh.getTvNum().setBackgroundResource(color);
 
 
-                            if (cr.getState12() == ClassRoom.OCCUPIED) {
 
-                                vh.getImbtn12().setImageResource(R.color.main_5);
+
+                            if (cr.getState12() == ClassRoom.UNOCCUPIED) {
+
+                                vh.getImbtn12().setImageResource(R.color.main_4);
+                                vh.getImbtn12().setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Intent intent = new Intent(CRQueryActivity.this,DirectReserveActivity.class);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putInt("number",list.get(position).getNumber());
+                                        bundle.putInt("class",0);
+                                        bundle.putInt("time",list.get(position).getDate());
+                                        bundle.putInt("build",build);
+                                        intent.putExtras(bundle);
+                                        startActivity(intent);
+                                    }
+                                });
                             }
-                            if (cr.getState34() == ClassRoom.OCCUPIED) {
+                            if (cr.getState34() == ClassRoom.UNOCCUPIED) {
 
-                                vh.getImbtn34().setImageResource(R.color.main_5);
+                                vh.getImbtn34().setImageResource(R.color.main_4);
+                                vh.getImbtn34().setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Intent intent = new Intent(CRQueryActivity.this,DirectReserveActivity.class);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putInt("number",list.get(position).getNumber());
+                                        bundle.putInt("class",1);
+                                        bundle.putInt("time",list.get(position).getDate());
+                                        intent.putExtras(bundle);
+                                        startActivity(intent);
+                                    }
+                                });
                             }
-                            if (cr.getState56() == ClassRoom.OCCUPIED) {
+                            if (cr.getState56() == ClassRoom.UNOCCUPIED) {
 
-                                vh.getImbtn56().setImageResource(R.color.main_5);
+                                vh.getImbtn56().setImageResource(R.color.main_4);
+                                vh.getImbtn56().setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Intent intent = new Intent(CRQueryActivity.this,DirectReserveActivity.class);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putInt("number",list.get(position).getNumber());
+                                        bundle.putInt("class",2);
+                                        bundle.putInt("time",list.get(position).getDate());
+                                        intent.putExtras(bundle);
+                                        startActivity(intent);
+                                    }
+                                });
                             }
-                            if (cr.getState78() == ClassRoom.OCCUPIED) {
+                            if (cr.getState78() == ClassRoom.UNOCCUPIED) {
 
-                                vh.getImbtn78().setImageResource(R.color.main_5);
+                                vh.getImbtn78().setImageResource(R.color.main_4);
+
+                                vh.getImbtn78().setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Intent intent = new Intent(CRQueryActivity.this,DirectReserveActivity.class);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putInt("number",list.get(position).getNumber());
+                                        bundle.putInt("class",3);
+                                        bundle.putInt("time",list.get(position).getDate());
+                                        intent.putExtras(bundle);
+                                        startActivity(intent);
+                                    }
+                                });
                             }
-                            if (cr.getState910() == ClassRoom.OCCUPIED) {
+                            if (cr.getState910() == ClassRoom.UNOCCUPIED) {
 
-                                vh.getImbtn910().setImageResource(R.color.main_5);
+                                vh.getImbtn910().setImageResource(R.color.main_4);
+                                vh.getImbtn910().setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Intent intent = new Intent(CRQueryActivity.this,DirectReserveActivity.class);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putInt("number",list.get(position).getNumber());
+                                        bundle.putInt("class",4);
+                                        bundle.putInt("time",list.get(position).getDate());
+                                        intent.putExtras(bundle);
+                                        startActivity(intent);
+                                    }
+                                });
                             }
                         }
 

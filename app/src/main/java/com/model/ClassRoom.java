@@ -20,6 +20,7 @@ public class ClassRoom extends BmobObject {
     private int state910;
     private int date;
 
+    public static final int UNOCCUPIED = 0;
     public static final int OCCUPIED = 1;
 
     public ClassRoom() {

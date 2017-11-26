@@ -56,4 +56,8 @@ public class ActionBarView extends LinearLayout {
     public void setMore(int id) {
         more.setBackgroundResource(id);
     }
+
+    public ImageButton getMore() {
+        return more;
+    }
 }

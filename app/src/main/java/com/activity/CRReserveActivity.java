@@ -123,30 +123,38 @@ public class CRReserveActivity extends AppCompatActivity {
                 Log.v("教室预约",""+time);
 
                 Log.v("教室预约",reason);
+
                 if (isTimeSel == 1 && CRNum!=-1 && !reason.equals("")){
+                    if (year_sel == 0 || month_sel == 0 || date_sel ==0){
+                        ToastUtil.showToast(CRReserveActivity.this,"请选择预约日期");
+                    }else if(year_sel!=calendar.get(Calendar.YEAR) || month_sel!=calendar.get(Calendar.MONTH)|| Math.abs(date_sel-calendar.get(Calendar.DATE))>3){
+                        ToastUtil.showToast(CRReserveActivity.this,"只能预约三天以内的教室");
+                    }else{
 
-                    ReserveInfo info = new ReserveInfo(CRNum,time,year_sel,month_sel,date_sel,reason
-                            ,PreferenceUtil.getData(CRReserveActivity.this,"userInfo","email"),Constant.STATE_UNCHECKED);
+                        ReserveInfo info = new ReserveInfo(CRNum,time,date_sel-calendar.get(Calendar.DATE),reason
+                                ,PreferenceUtil.getData(CRReserveActivity.this,"userInfo","email"),Constant.STATE_UNCHECKED);
 
-                    info.save(new SaveListener<String>() {
-                        @Override
-                        public void done(String s, BmobException e) {
-                            if (e == null){
-                                new AlertDialog.Builder(CRReserveActivity.this)
-                                        .setTitle("提醒")
-                                        .setMessage("预约消息发送成功")
-                                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                finish();
-                                            }
-                                        })
-                                        .show();
-                            }else{
-                                ToastUtil.showToast(CRReserveActivity.this,"出错了...");
+                        info.save(new SaveListener<String>() {
+                            @Override
+                            public void done(String s, BmobException e) {
+                                if (e == null){
+                                    new AlertDialog.Builder(CRReserveActivity.this)
+                                            .setTitle("提醒")
+                                            .setMessage("预约消息发送成功")
+                                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    finish();
+                                                }
+                                            })
+                                            .show();
+                                }else{
+                                    ToastUtil.showToast(CRReserveActivity.this,"出错了...");
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
+
 
                 }else {
                     ToastUtil.showToast(CRReserveActivity.this,"请确认信息填写完整");

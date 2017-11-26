@@ -11,6 +11,8 @@ import com.model.ReserveInfo;
 import com.util.ToastUtil;
 import com.view.ActionBarView;
 
+import java.util.Calendar;
+
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.QueryListener;
@@ -70,7 +72,8 @@ public class ReserveDetailActivity extends AppCompatActivity {
 
                     }
                     tvTime.setText(time);
-                    tvDate.setText(reserveInfo.getYear()+"-"+(reserveInfo.getMonth()+1)+"-"+reserveInfo.getDate());
+                    Calendar calendar = Calendar.getInstance();
+                    tvDate.setText(""+calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+(calendar.get(Calendar.DATE)+reserveInfo.getDate()));
                     tvReason.setText(reserveInfo.getReason());
                     String state="";
                     switch (reserveInfo.getState()){

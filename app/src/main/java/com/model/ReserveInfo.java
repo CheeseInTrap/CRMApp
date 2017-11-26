@@ -10,8 +10,6 @@ public class ReserveInfo extends BmobObject{
 
     private int number;
     private int time;
-    private int year;
-    private int month;
     private int date;
     private String reason;
 
@@ -22,12 +20,10 @@ public class ReserveInfo extends BmobObject{
 
     }
 
-    public ReserveInfo(int number,int time,int year,int month,int date,String reason,String email,int state){
+    public ReserveInfo(int number,int time,int date,String reason,String email,int state){
 
         this.number = number;
         this.time = time;
-        this.year = year;
-        this.month = month;
         this.date = date;
         this.reason = reason;
         this.email = email;
@@ -42,14 +38,6 @@ public class ReserveInfo extends BmobObject{
 
     public int getTime() {
         return time;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public int getMonth() {
-        return month;
     }
 
     public int getDate() {

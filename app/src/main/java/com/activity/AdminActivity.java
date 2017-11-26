@@ -24,6 +24,7 @@ import com.util.db.MySQLiteHelper;
 import com.view.ActionBarView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
@@ -151,7 +152,8 @@ public class AdminActivity extends AppCompatActivity {
                             TextView tvTime = vh.getTvTime();
                             TextView tvState = vh.getTvState();
                             tvNum.setText(info.getNumber()+"");
-                            tvTime.setText(""+info.getYear()+"-"+info.getMonth()+"-"+info.getDate());
+                            Calendar calendar = Calendar.getInstance();
+                            tvTime.setText(""+calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+(calendar.get(Calendar.DATE)+info.getDate()));
 
 
                             int color = 0;
@@ -174,8 +176,6 @@ public class AdminActivity extends AppCompatActivity {
                                 default:
                                     break;
                             }
-                            tvNum.setText(""+info.getNumber());
-                            tvTime.setText(""+info.getYear()+"-"+info.getMonth()+"-"+info.getDate());
 
                             img1.setBackgroundResource(color);
                             img2.setBackgroundResource(color);

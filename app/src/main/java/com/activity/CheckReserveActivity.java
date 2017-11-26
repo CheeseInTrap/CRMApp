@@ -18,6 +18,7 @@ import com.util.ToastUtil;
 import com.util.db.MySQLiteHelper;
 import com.view.ActionBarView;
 
+import java.util.Calendar;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
@@ -90,8 +91,9 @@ public class CheckReserveActivity extends AppCompatActivity {
                             break;
 
                     }
+                    Calendar calendar = Calendar.getInstance();
                     tvTime.setText(time);
-                    tvDate.setText(info.getYear() + "-" + (info.getMonth() + 1) + "-" + info.getDate());
+                    tvDate.setText(""+calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+(calendar.get(Calendar.DATE)+info.getDate()));
                     tvReason.setText(info.getReason());
                     String state = "";
                     switch (info.getState()) {

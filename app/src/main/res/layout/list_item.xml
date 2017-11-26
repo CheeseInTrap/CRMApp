@@ -27,31 +27,31 @@
                 android:id="@+id/imbtn_12"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@color/main_4"/>
+                android:src="@color/main_5"/>
             <ImageView
                 android:padding="5dp"
                 android:id="@+id/imbtn_34"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@color/main_4"/>
+                android:src="@color/main_5"/>
             <ImageView
                 android:padding="5dp"
                 android:id="@+id/imbtn_56"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@color/main_4"/>
+                android:src="@color/main_5"/>
             <ImageView
                 android:padding="5dp"
                 android:id="@+id/imbtn_78"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@color/main_4"/>
+                android:src="@color/main_5"/>
             <ImageView
                 android:padding="5dp"
                 android:id="@+id/imbtn_910"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@color/main_4"/>
+                android:src="@color/main_5"/>
 
         </LinearLayout>
 
