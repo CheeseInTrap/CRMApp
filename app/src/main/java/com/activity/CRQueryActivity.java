@@ -19,9 +19,11 @@ import android.widget.TextView;
 import com.example.user.crmapp.R;
 import com.model.ClassRoom;
 import com.model.Constant;
+import com.util.NumberComparator;
 import com.util.ToastUtil;
 import com.view.ActionBarView;
 
+import java.util.Collections;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
@@ -203,6 +205,7 @@ public class CRQueryActivity extends AppCompatActivity {
             @Override
             public void done(final List<ClassRoom> list, BmobException e) {
                 if (e == null) {
+                    Collections.sort(list,new NumberComparator());
                     rvCR.setAdapter(new RecyclerView.Adapter() {
 
 
@@ -215,7 +218,7 @@ public class CRQueryActivity extends AppCompatActivity {
                         @Override
                         public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
                             ViewHolder vh = (ViewHolder) holder;
-                            ClassRoom cr = list.get(position);
+                            final ClassRoom cr = list.get(position);
 
                             vh.getTvNum().setText("" + cr.getNumber());
                             int color = 0;
@@ -233,6 +236,16 @@ public class CRQueryActivity extends AppCompatActivity {
                                     break;
                             }
                             vh.getTvNum().setBackgroundResource(color);
+                            vh.getTvNum().setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent = new Intent(CRQueryActivity.this,SingleClassRoomActivity.class);
+                                    Bundle bundle = new Bundle();
+                                    bundle.putInt("number",cr.getNumber());
+                                    intent.putExtras(bundle);
+                                    startActivity(intent);
+                                }
+                            });
 
 
 

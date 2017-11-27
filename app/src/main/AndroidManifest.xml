@@ -56,7 +56,8 @@
         <activity android:name="com.activity.ReserveDetailActivity" />
         <activity android:name="com.activity.AdminActivity" />
         <activity android:name="com.activity.CheckReserveActivity" />
-        <activity android:name="com.activity.DirectReserveActivity"></activity>
+        <activity android:name="com.activity.DirectReserveActivity" />
+        <activity android:name="com.activity.SingleClassRoomActivity"></activity>
     </application>
 
 </manifest>

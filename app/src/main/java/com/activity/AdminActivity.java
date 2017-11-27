@@ -199,7 +199,6 @@ public class AdminActivity extends AppCompatActivity {
                                                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                                             @Override
                                                             public void onClick(DialogInterface dialogInterface, int i) {
-                                                                finish();
                                                             }
                                                         })
                                                         .show();

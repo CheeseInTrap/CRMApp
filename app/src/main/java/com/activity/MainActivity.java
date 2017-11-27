@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private int[] pics = new int[]{R.drawable.icon_1, R.drawable.icon_2, R.drawable.icon_3, R.drawable.icon_4, R.drawable.icon_5};
-    private String[] titles = new String[]{"校园地图", "教室查询", "教室预约", "教室推荐", "预约信息"};
+    private String[] titles = new String[]{"校园地图", "教室查询", "教室推荐", "预约信息","管理员"};
 
     private int[] icons = new int[]{R.drawable.mine_fill,R.drawable.mail_fill,R.drawable.integral_fill,R.drawable.lock_fill
             ,R.drawable.undo};
@@ -245,13 +245,13 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtras(bundle);
                 break;
             case 2:
-                intent = new Intent(this, CRReserveActivity.class);
-                break;
-            case 3:
                 intent = new Intent(this, CRRecommendActivity.class);
                 break;
-            case 4:
+            case 3:
                 intent = new Intent(this, ReserveInfoActivity.class);
+                break;
+            case 4:
+                intent = new Intent(this, AdminActivity.class);
                 break;
             default:
                 break;
