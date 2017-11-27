@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,20 +19,27 @@ import com.util.ToastUtil;
 import com.util.db.MySQLiteHelper;
 import com.view.ActionBarView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import cn.bmob.v3.BmobBatch;
+import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BatchResult;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.QueryListListener;
 import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 public class CheckReserveActivity extends AppCompatActivity {
 
     private TextView tvNum;
+    private TextView tvBuild;
     private TextView tvTime;
     private TextView tvDate;
+    private TextView tvEmail;
     private TextView tvReason;
     private Button btnAgree;
     private Button btnReject;
@@ -51,8 +59,10 @@ public class CheckReserveActivity extends AppCompatActivity {
         initActionBarView();
 
         tvNum = (TextView) findViewById(R.id.tv_num);
+        tvBuild = (TextView) findViewById(R.id.tv_build);
         tvTime = (TextView) findViewById(R.id.tv_time);
         tvDate = (TextView) findViewById(R.id.tv_date);
+        tvEmail = (TextView) findViewById(R.id.tv_email);
         tvReason = (TextView) findViewById(R.id.tv_reason);
 
         btnAgree = (Button) findViewById(R.id.btn_agree);
@@ -70,6 +80,14 @@ public class CheckReserveActivity extends AppCompatActivity {
                 if (e == null) {
                     info = reserveInfo;
                     tvNum.setText("" + info.getNumber());
+                    if (info.getBuild() == Constant.BUILD_ZX){
+
+                        tvBuild.setText("正心楼");
+                    }else if (info.getBuild() == Constant.BUILD_ZZ){
+                        tvBuild.setText("致知楼");
+                    }else{
+                        tvBuild.setText("诚意楼");
+                    }
                     String time = "";
                     switch (info.getTime()) {
                         case 0:
@@ -94,6 +112,7 @@ public class CheckReserveActivity extends AppCompatActivity {
                     Calendar calendar = Calendar.getInstance();
                     tvTime.setText(time);
                     tvDate.setText(""+calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+(calendar.get(Calendar.DATE)+info.getDate()));
+                    tvEmail.setText(info.getEmail());
                     tvReason.setText(info.getReason());
                     String state = "";
                     switch (info.getState()) {
@@ -129,13 +148,15 @@ public class CheckReserveActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                BmobQuery<ClassRoom> query = new BmobQuery<ClassRoom>();
+                final BmobQuery<ClassRoom> query = new BmobQuery<ClassRoom>();
                 query.addWhereEqualTo("number", Integer.parseInt(tvNum.getText().toString()));
+                query.addWhereEqualTo("date",info.getDate());
+                query.addWhereEqualTo("building",info.getBuild());
                 query.findObjects(new FindListener<ClassRoom>() {
                     @Override
                     public void done(List<ClassRoom> list, BmobException e) {
                         if (e == null) {
-                            ClassRoom classRoom = list.get(0);
+                            final ClassRoom classRoom = list.get(0);
 
                             boolean isOccupied = false;
 
@@ -203,6 +224,36 @@ public class CheckReserveActivity extends AppCompatActivity {
                                     @Override
                                     public void done(BmobException e) {
                                         if (e == null){
+
+                                            //把相同的申请自动删掉
+                                            BmobQuery<ReserveInfo> query1 = new BmobQuery<>();
+                                            query1.addWhereEqualTo("number",info.getNumber());
+                                            query1.addWhereEqualTo("date",info.getDate());
+                                            query1.addWhereEqualTo("time",info.getTime());
+                                            query1.addWhereEqualTo("build",info.getBuild());
+                                            query1.findObjects(new FindListener<ReserveInfo>() {
+                                                @Override
+                                                public void done(List<ReserveInfo> list, BmobException e) {
+                                                    List<BmobObject> reserveinfos = new ArrayList<>();
+                                                    for (int i=0;i<list.size();i++){
+
+                                                        ReserveInfo reserveInfo = new ReserveInfo();
+                                                        reserveInfo.setObjectId(list.get(i).getObjectId());
+                                                        if (!reserveInfo.getObjectId().equals(info.getObjectId())){
+                                                            reserveinfos.add(reserveInfo);
+                                                        }
+
+                                                    }
+                                                    new BmobBatch().deleteBatch(reserveinfos).doBatch(new QueryListListener<BatchResult>() {
+                                                        @Override
+                                                        public void done(List<BatchResult> list, BmobException e) {
+                                                            if (e == null){
+                                                                ToastUtil.showToast(CheckReserveActivity.this,"重复申请已删除");
+                                                            }
+                                                        }
+                                                    });
+                                                }
+                                            });
                                             info.setState(Constant.STATE_PASS);
                                             info.update(info.getObjectId(), new UpdateListener() {
                                                 @Override
@@ -214,10 +265,15 @@ public class CheckReserveActivity extends AppCompatActivity {
                                                                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                                                     @Override
                                                                     public void onClick(DialogInterface dialogInterface, int i) {
+
+
                                                                         finish();
                                                                     }
                                                                 })
                                                                 .show();
+
+
+
                                                     } else {
                                                         ToastUtil.showToast(CheckReserveActivity.this, "出错了...");
                                                     }

@@ -97,7 +97,7 @@ public class DirectReserveActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (!etReason.getText().toString().equals("")) {
-                    ReserveInfo info = new ReserveInfo(number, class_state, time, etReason.getText().toString()
+                    ReserveInfo info = new ReserveInfo(number, build,class_state, time, etReason.getText().toString()
                             , PreferenceUtil.getData(DirectReserveActivity.this, "userInfo", "email"), Constant.STATE_UNCHECKED);
 
                     info.save(new SaveListener<String>() {
@@ -119,6 +119,8 @@ public class DirectReserveActivity extends AppCompatActivity {
                             }
                         }
                     });
+                }else{
+                    ToastUtil.showToast(DirectReserveActivity.this,"请填写预约理由");
                 }
             }
         });

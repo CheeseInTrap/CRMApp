@@ -20,7 +20,7 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv"
-            android:padding="10dp"
+            android:padding="8dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </android.support.v7.widget.RecyclerView>
@@ -31,7 +31,7 @@
     <LinearLayout
         android:id="@+id/drawer_content"
         android:orientation="vertical"
-        android:layout_width="240dp"
+        android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/white">
@@ -40,7 +40,7 @@
             android:id="@+id/img"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@color/style_color" />
+            android:background="@drawable/sun_main" />
         <View
             android:background="@color/style_color_light"
             android:layout_width="match_parent"
@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:choiceMode="singleChoice"
-            android:divider="@color/cardview_light_background"
+            android:divider="@color/light_grey"
             android:dividerHeight="1dp">
 
         </ListView>

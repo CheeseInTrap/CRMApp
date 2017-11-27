@@ -42,7 +42,6 @@
         <activity android:name="com.activity.LoginActivity" />
         <activity android:name="com.activity.RegisterActivity" />
         <activity android:name="com.activity.CRQueryActivity" />
-        <activity android:name="com.activity.CRReserveActivity" />
         <activity android:name="com.activity.CRRecommendActivity" />
         <activity android:name="com.activity.CRRecresultActivity" />
 

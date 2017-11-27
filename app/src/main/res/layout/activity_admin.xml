@@ -15,7 +15,36 @@
         android:layout_height="@dimen/actionbar_height">
     </com.view.ActionBarView>
 
-
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="2dp">
+        <TextView
+            android:text="教室号"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:text="预约时间"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:layout_weight="3"/>
+        <TextView
+            android:text="审核状态"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:layout_weight="2"
+            android:layout_marginRight="10dp"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+    </LinearLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv"
         android:layout_width="match_parent"

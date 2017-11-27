@@ -76,26 +76,26 @@ public class MainActivity extends AppCompatActivity {
 
         int level = PreferenceUtil.getInt(this,"userInfo","level");
 
-        switch (level){
-            case 1:
-                imageView.setImageResource(R.drawable.fox);
-                break;
-            case 2:
-                imageView.setImageResource(R.drawable.koala);
-                break;
-            case 3:
-                imageView.setImageResource(R.drawable.whale);
-                break;
-            case 4:
-                imageView.setImageResource(R.drawable.chick);
-                break;
-            case 5:
-                imageView.setImageResource(R.drawable.bull);
-                break;
-
-            default:
-                break;
-        }
+//        switch (level){
+//            case 1:
+//                imageView.setImageResource(R.drawable.fox);
+//                break;
+//            case 2:
+//                imageView.setImageResource(R.drawable.koala);
+//                break;
+//            case 3:
+//                imageView.setImageResource(R.drawable.whale);
+//                break;
+//            case 4:
+//                imageView.setImageResource(R.drawable.chick);
+//                break;
+//            case 5:
+//                imageView.setImageResource(R.drawable.bull);
+//                break;
+//
+//            default:
+//                break;
+//        }
 
         //imageView.setImageResource(R.drawable.main);
         List<String> contents = new ArrayList<>();

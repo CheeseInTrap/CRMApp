@@ -27,9 +27,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import cn.bmob.v3.BmobBatch;
+import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BatchResult;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.QueryListListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 public class AdminActivity extends AppCompatActivity {
@@ -95,19 +99,50 @@ public class AdminActivity extends AppCompatActivity {
         actionBarView = (ActionBarView) findViewById(R.id.action_bar);
 
         actionBarView.setTitle("预约信息（管理员模式）");
+        actionBarView.setMore(R.drawable.empty);
+        actionBarView.setOnBackClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         actionBarView.setOnMoreClick(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                new AlertDialog.Builder(AdminActivity.this)
+                        .setTitle("提醒")
+                        .setMessage("确认全部删除么？")
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
 
+                            }
+                        })
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                List<BmobObject> reserveInfos = new ArrayList<>();
+                                for (int k =0;k<infos.size();k++){
+                                    ReserveInfo reserveInfo = new ReserveInfo();
+                                    reserveInfo.setObjectId(infos.get(k).getObjectId());
+                                    reserveInfos.add(reserveInfo);
+                                }
+
+                                new BmobBatch().deleteBatch(reserveInfos).doBatch(new QueryListListener<BatchResult>() {
+                                    @Override
+                                    public void done(List<BatchResult> list, BmobException e) {
+                                        if (e == null){
+                                            ToastUtil.showToast(AdminActivity.this,"删除成功");
+                                            onResume();
+                                        }
+                                    }
+                                });
+                            }
+                        })
+                        .show();
             }
         });
 
-        actionBarView.setOnBackClick(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
 
