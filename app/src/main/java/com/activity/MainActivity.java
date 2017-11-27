@@ -76,33 +76,10 @@ public class MainActivity extends AppCompatActivity {
 
         int level = PreferenceUtil.getInt(this,"userInfo","level");
 
-//        switch (level){
-//            case 1:
-//                imageView.setImageResource(R.drawable.fox);
-//                break;
-//            case 2:
-//                imageView.setImageResource(R.drawable.koala);
-//                break;
-//            case 3:
-//                imageView.setImageResource(R.drawable.whale);
-//                break;
-//            case 4:
-//                imageView.setImageResource(R.drawable.chick);
-//                break;
-//            case 5:
-//                imageView.setImageResource(R.drawable.bull);
-//                break;
-//
-//            default:
-//                break;
-//        }
-
-        //imageView.setImageResource(R.drawable.main);
         List<String> contents = new ArrayList<>();
         contents.add(PreferenceUtil.getData(this,"userInfo","username"));
         contents.add(PreferenceUtil.getData(this,"userInfo","email"));
         contents.add(""+PreferenceUtil.getInt(this,"userInfo","level"));
-        contents.add("管理员");
         contents.add("退出登录");
 
 
@@ -114,10 +91,6 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
                     case 3:
-                        startActivity(new Intent(MainActivity.this,AdminActivity.class));
-                        break;
-                    case 4:
-
                         PreferenceUtil.clear(MainActivity.this,"userInfo");
                         startActivity(new Intent(MainActivity.this,LoginActivity.class));
                         finish();
@@ -149,7 +122,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public int getItemCount() {
-                return pics.length;
+                if (PreferenceUtil.getInt(MainActivity.this,"userInfo","role")==Constant.admin){
+
+                    return pics.length;
+                }
+                return pics.length-1;
             }
         });
 
@@ -269,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 5;
+            return 4;
         }
 
         @Override

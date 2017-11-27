@@ -1,6 +1,7 @@
 package com.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +18,9 @@ import com.activity.CRQueryActivity;
 import com.activity.MapActivity;
 import com.example.user.crmapp.R;
 import com.model.Constant;
+import com.zyao89.view.zloading.ZLoadingDialog;
+import com.zyao89.view.zloading.ZLoadingView;
+import com.zyao89.view.zloading.Z_TYPE;
 
 /**
  * 作者 ： Created by zjr on 2017/11/6 22:31.
@@ -25,7 +29,6 @@ import com.model.Constant;
 public class SimpleMapFragment extends BaseFragment{
 
     private WebView webView;
-
     private MapActivity.MyOnTouchListener onTouchListener;
 
     @Override
@@ -76,8 +79,12 @@ public class SimpleMapFragment extends BaseFragment{
         settings.setJavaScriptEnabled(true);
         settings.setSupportZoom(true);
         settings.setBuiltInZoomControls(true);
+
+
+
         webView.setWebViewClient(new MyWebViewClient());
         webView.loadUrl("http://map.hit.edu.cn/");
+
 
         return view;
     }

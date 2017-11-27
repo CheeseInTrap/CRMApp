@@ -1,7 +1,10 @@
 package com.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +25,9 @@ import com.model.Constant;
 import com.util.NumberComparator;
 import com.util.ToastUtil;
 import com.view.ActionBarView;
+import com.zyao89.view.zloading.ZLoadingDialog;
+import com.zyao89.view.zloading.ZLoadingView;
+import com.zyao89.view.zloading.Z_TYPE;
 
 import java.util.Collections;
 import java.util.List;
@@ -42,15 +48,27 @@ public class CRQueryActivity extends AppCompatActivity {
     private RadioButton date3;
 
 
+    private static final int DIALOG_START = 1;
+    private static final int DIALOG_DISMISS = 0;
 
 
     private static int build;
+    private ZLoadingDialog dialog;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crquery);
+
+
+        dialog = new ZLoadingDialog(CRQueryActivity.this);
+        dialog.setLoadingBuilder(Z_TYPE.STAR_LOADING)//设置类型
+                .setLoadingColor(Color.BLACK)//颜色
+                .setHintText("Loading...")
+                .setHintTextSize(16) // 设置字体大小 dp
+                .setHintTextColor(Color.GRAY);
+        ; // 设置字体颜色
 
         build = getIntent().getExtras().getInt(Constant.Type);
         initActionBarView();
@@ -65,15 +83,16 @@ public class CRQueryActivity extends AppCompatActivity {
         group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if (date1.isChecked()){
-                    setSituation(build,0);
-                }else if (date2.isChecked()){
-                    setSituation(build,1);
-                }else if (date3.isChecked()){
-                    setSituation(build,2);
+                if (date1.isChecked()) {
+                    setSituation(build, 0);
+                } else if (date2.isChecked()) {
+                    setSituation(build, 1);
+                } else if (date3.isChecked()) {
+                    setSituation(build, 2);
                 }
             }
         });
+
 
         setSituation(build, 0);
 
@@ -148,7 +167,7 @@ public class CRQueryActivity extends AppCompatActivity {
             @Override
             public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
                 MenuInflater inflater = getMenuInflater();
-                inflater.inflate(R.menu.menu,contextMenu);
+                inflater.inflate(R.menu.menu, contextMenu);
             }
         });
         switch (build) {
@@ -163,10 +182,8 @@ public class CRQueryActivity extends AppCompatActivity {
                 actionBarView.setTitle("诚意楼");
                 break;
         }
-        actionBarView.setMore(R.drawable.feedback_fill);
+        actionBarView.setMore(R.drawable.more);
     }
-
-
 
 
     @Override
@@ -198,6 +215,7 @@ public class CRQueryActivity extends AppCompatActivity {
     }
 
     private void setSituation(final int buildType, int date) {
+        dialog.show();
         BmobQuery<ClassRoom> query = new BmobQuery<>();
         query.addWhereEqualTo("building", buildType);
         query.addWhereEqualTo("date", date);
@@ -205,7 +223,7 @@ public class CRQueryActivity extends AppCompatActivity {
             @Override
             public void done(final List<ClassRoom> list, BmobException e) {
                 if (e == null) {
-                    Collections.sort(list,new NumberComparator());
+                    Collections.sort(list, new NumberComparator());
                     rvCR.setAdapter(new RecyclerView.Adapter() {
 
 
@@ -217,6 +235,7 @@ public class CRQueryActivity extends AppCompatActivity {
 
                         @Override
                         public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+
                             ViewHolder vh = (ViewHolder) holder;
                             final ClassRoom cr = list.get(position);
 
@@ -239,15 +258,13 @@ public class CRQueryActivity extends AppCompatActivity {
                             vh.getTvNum().setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    Intent intent = new Intent(CRQueryActivity.this,SingleClassRoomActivity.class);
+                                    Intent intent = new Intent(CRQueryActivity.this, SingleClassRoomActivity.class);
                                     Bundle bundle = new Bundle();
-                                    bundle.putInt("number",cr.getNumber());
+                                    bundle.putInt("number", cr.getNumber());
                                     intent.putExtras(bundle);
                                     startActivity(intent);
                                 }
                             });
-
-
 
 
                             if (cr.getState12() == ClassRoom.UNOCCUPIED) {
@@ -256,12 +273,12 @@ public class CRQueryActivity extends AppCompatActivity {
                                 vh.getImbtn12().setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        Intent intent = new Intent(CRQueryActivity.this,DirectReserveActivity.class);
+                                        Intent intent = new Intent(CRQueryActivity.this, DirectReserveActivity.class);
                                         Bundle bundle = new Bundle();
-                                        bundle.putInt("number",list.get(position).getNumber());
-                                        bundle.putInt("class",0);
-                                        bundle.putInt("time",list.get(position).getDate());
-                                        bundle.putInt("build",build);
+                                        bundle.putInt("number", list.get(position).getNumber());
+                                        bundle.putInt("class", 0);
+                                        bundle.putInt("time", list.get(position).getDate());
+                                        bundle.putInt("build", build);
                                         intent.putExtras(bundle);
                                         startActivity(intent);
                                     }
@@ -273,11 +290,12 @@ public class CRQueryActivity extends AppCompatActivity {
                                 vh.getImbtn34().setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        Intent intent = new Intent(CRQueryActivity.this,DirectReserveActivity.class);
+                                        Intent intent = new Intent(CRQueryActivity.this, DirectReserveActivity.class);
                                         Bundle bundle = new Bundle();
-                                        bundle.putInt("number",list.get(position).getNumber());
-                                        bundle.putInt("class",1);
-                                        bundle.putInt("time",list.get(position).getDate());
+                                        bundle.putInt("number", list.get(position).getNumber());
+                                        bundle.putInt("class", 1);
+                                        bundle.putInt("time", list.get(position).getDate());
+                                        bundle.putInt("build", list.get(position).getBuilding());
                                         intent.putExtras(bundle);
                                         startActivity(intent);
                                     }
@@ -289,11 +307,12 @@ public class CRQueryActivity extends AppCompatActivity {
                                 vh.getImbtn56().setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        Intent intent = new Intent(CRQueryActivity.this,DirectReserveActivity.class);
+                                        Intent intent = new Intent(CRQueryActivity.this, DirectReserveActivity.class);
                                         Bundle bundle = new Bundle();
-                                        bundle.putInt("number",list.get(position).getNumber());
-                                        bundle.putInt("class",2);
-                                        bundle.putInt("time",list.get(position).getDate());
+                                        bundle.putInt("number", list.get(position).getNumber());
+                                        bundle.putInt("class", 2);
+                                        bundle.putInt("time", list.get(position).getDate());
+                                        bundle.putInt("build", list.get(position).getBuilding());
                                         intent.putExtras(bundle);
                                         startActivity(intent);
                                     }
@@ -306,11 +325,12 @@ public class CRQueryActivity extends AppCompatActivity {
                                 vh.getImbtn78().setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        Intent intent = new Intent(CRQueryActivity.this,DirectReserveActivity.class);
+                                        Intent intent = new Intent(CRQueryActivity.this, DirectReserveActivity.class);
                                         Bundle bundle = new Bundle();
-                                        bundle.putInt("number",list.get(position).getNumber());
-                                        bundle.putInt("class",3);
-                                        bundle.putInt("time",list.get(position).getDate());
+                                        bundle.putInt("number", list.get(position).getNumber());
+                                        bundle.putInt("class", 3);
+                                        bundle.putInt("time", list.get(position).getDate());
+                                        bundle.putInt("build", list.get(position).getBuilding());
                                         intent.putExtras(bundle);
                                         startActivity(intent);
                                     }
@@ -322,15 +342,19 @@ public class CRQueryActivity extends AppCompatActivity {
                                 vh.getImbtn910().setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        Intent intent = new Intent(CRQueryActivity.this,DirectReserveActivity.class);
+                                        Intent intent = new Intent(CRQueryActivity.this, DirectReserveActivity.class);
                                         Bundle bundle = new Bundle();
-                                        bundle.putInt("number",list.get(position).getNumber());
-                                        bundle.putInt("class",4);
-                                        bundle.putInt("time",list.get(position).getDate());
+                                        bundle.putInt("number", list.get(position).getNumber());
+                                        bundle.putInt("class", 4);
+                                        bundle.putInt("time", list.get(position).getDate());
+                                        bundle.putInt("build", list.get(position).getBuilding());
                                         intent.putExtras(bundle);
                                         startActivity(intent);
                                     }
                                 });
+                            }
+                            if (position == list.size()-1){
+                                dialog.dismiss();
                             }
                         }
 
@@ -346,5 +370,6 @@ public class CRQueryActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 }

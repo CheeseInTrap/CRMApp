@@ -9,9 +9,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -39,7 +41,11 @@ public class CRRecommendActivity extends AppCompatActivity {
     private RadioButton rbMedium;
     private RadioButton rbLarge;
 
+
     private ActionBarView actionBarView;
+    private Spinner sp;
+
+    private static int build;
 
 
     @Override
@@ -54,6 +60,21 @@ public class CRRecommendActivity extends AppCompatActivity {
         rbMedium = (RadioButton) findViewById(R.id.rb_medium);
         rbLarge = (RadioButton) findViewById(R.id.rb_large);
 
+        sp = (Spinner) findViewById(R.id.sp);
+
+        sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                build = i-1;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+                build = -1;
+            }
+        });
+
 
         findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,21 +87,29 @@ public class CRRecommendActivity extends AppCompatActivity {
                     floor = Integer.parseInt(etFloor.getText().toString());
                 }
 
-                Intent intent = new Intent(CRRecommendActivity.this, CRRecresultActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("floor", floor);
-                if (rbSmall.isChecked()) {
-                    bundle.putInt("size", Constant.SIZE_SMALL);
-                } else if (rbMedium.isChecked()) {
-                    bundle.putInt("size", Constant.SIZE_MEDIUM);
-                } else if (rbLarge.isChecked()) {
-                    bundle.putInt("size", Constant.SIZE_LARGE);
-                } else {
+                if (floor>3){
+                    ToastUtil.showToast(CRRecommendActivity.this,"不存在该楼层");
+                }else{
+                    Intent intent = new Intent(CRRecommendActivity.this, CRRecresultActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("build",build);
+                    bundle.putInt("floor", floor);
+                    if (rbSmall.isChecked()) {
+                        bundle.putInt("size", Constant.SIZE_SMALL);
+                    } else if (rbMedium.isChecked()) {
+                        bundle.putInt("size", Constant.SIZE_MEDIUM);
+                    } else if (rbLarge.isChecked()) {
+                        bundle.putInt("size", Constant.SIZE_LARGE);
+                    } else {
 
-                    bundle.putInt("size", -1);
+                        bundle.putInt("size", -1);
+                    }
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                 }
-                intent.putExtras(bundle);
-                startActivity(intent);
+
+
+
 
             }
         });
@@ -97,6 +126,7 @@ public class CRRecommendActivity extends AppCompatActivity {
 
             }
         });
+        actionBarView.getMore().setVisibility(View.INVISIBLE);
     }
 
 }

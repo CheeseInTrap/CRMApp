@@ -1,5 +1,6 @@
 package com.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.user.crmapp.R;
@@ -33,6 +36,11 @@ public class CRRecresultActivity extends AppCompatActivity {
 
     private ActionBarView actionBarView;
     private RecyclerView rvCR;
+    private RadioButton date1;
+    private RadioButton date2;
+    private RadioButton date3;
+    private RadioGroup group;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,10 +51,40 @@ public class CRRecresultActivity extends AppCompatActivity {
         rvCR.setLayoutManager(new LinearLayoutManager(this));
 
 
+        group = (RadioGroup) findViewById(R.id.group);
+        date1 = (RadioButton) findViewById(R.id.date1);
+        date2 = (RadioButton) findViewById(R.id.date2);
+        date3 = (RadioButton) findViewById(R.id.date3);
+        date1.setChecked(true);
+        group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (date1.isChecked()) {
+                    setSituation(0);
+                } else if (date2.isChecked()) {
+                    setSituation(1);
+                } else if (date3.isChecked()) {
+                    setSituation(2);
+                }
+            }
+        });
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setSituation(0);
+
+    }
+
+    private void setSituation(int date){
         Bundle bundle = getIntent().getExtras();
 
         int floor = bundle.getInt("floor");
         int size = bundle.getInt("size");
+        int build = bundle.getInt("build");
 
         BmobQuery<ClassRoom> query = new BmobQuery<>();
         if (floor!=0){
@@ -56,6 +94,12 @@ public class CRRecresultActivity extends AppCompatActivity {
         if (size!=-1){
 
             query.addWhereEqualTo("size",size);
+        }
+        if (build!=-1){
+            query.addWhereEqualTo("building",build);
+        }
+        if (date!=-1){
+            query.addWhereEqualTo("date",date);
         }
         query.findObjects(new FindListener<ClassRoom>() {
             @Override
@@ -71,9 +115,9 @@ public class CRRecresultActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+                        public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
                             ViewHolder vh = (ViewHolder) holder;
-                            ClassRoom cr = list.get(position);
+                            final ClassRoom cr = list.get(position);
 
                             vh.getTvNum().setText("" + cr.getNumber());
 
@@ -92,26 +136,102 @@ public class CRRecresultActivity extends AppCompatActivity {
                                     break;
                             }
                             vh.getTvNum().setBackgroundResource(color);
+                            vh.getTvNum().setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent = new Intent(CRRecresultActivity.this, SingleClassRoomActivity.class);
+                                    Bundle bundle = new Bundle();
+                                    bundle.putInt("number", cr.getNumber());
+                                    intent.putExtras(bundle);
+                                    startActivity(intent);
+                                }
+                            });
 
-                            if (cr.getState12() == ClassRoom.OCCUPIED) {
+                            if (cr.getState12() == ClassRoom.UNOCCUPIED) {
 
-                                vh.getImbtn12().setImageResource(R.color.main_5);
+                                vh.getImbtn12().setImageResource(R.color.main_4);
+                                vh.getImbtn12().setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Intent intent = new Intent(CRRecresultActivity.this, DirectReserveActivity.class);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putInt("number", list.get(position).getNumber());
+                                        bundle.putInt("class", 0);
+                                        bundle.putInt("time", list.get(position).getDate());
+                                        bundle.putInt("build", list.get(position).getBuilding());
+                                        intent.putExtras(bundle);
+                                        startActivity(intent);
+                                    }
+                                });
                             }
-                            if (cr.getState34() == ClassRoom.OCCUPIED) {
+                            if (cr.getState34() == ClassRoom.UNOCCUPIED) {
 
-                                vh.getImbtn34().setImageResource(R.color.main_5);
+                                vh.getImbtn34().setImageResource(R.color.main_4);
+                                vh.getImbtn34().setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Intent intent = new Intent(CRRecresultActivity.this, DirectReserveActivity.class);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putInt("number", list.get(position).getNumber());
+                                        bundle.putInt("class", 1);
+                                        bundle.putInt("time", list.get(position).getDate());
+                                        bundle.putInt("build", list.get(position).getBuilding());
+                                        intent.putExtras(bundle);
+                                        startActivity(intent);
+                                    }
+                                });
                             }
-                            if (cr.getState56() == ClassRoom.OCCUPIED) {
+                            if (cr.getState56() == ClassRoom.UNOCCUPIED) {
 
-                                vh.getImbtn56().setImageResource(R.color.main_5);
+                                vh.getImbtn56().setImageResource(R.color.main_4);
+                                vh.getImbtn56().setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Intent intent = new Intent(CRRecresultActivity.this, DirectReserveActivity.class);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putInt("number", list.get(position).getNumber());
+                                        bundle.putInt("class", 2);
+                                        bundle.putInt("time", list.get(position).getDate());
+                                        bundle.putInt("build", list.get(position).getBuilding());
+                                        intent.putExtras(bundle);
+                                        startActivity(intent);
+                                    }
+                                });
                             }
-                            if (cr.getState78() == ClassRoom.OCCUPIED) {
+                            if (cr.getState78() == ClassRoom.UNOCCUPIED) {
 
-                                vh.getImbtn78().setImageResource(R.color.main_5);
+                                vh.getImbtn78().setImageResource(R.color.main_4);
+
+                                vh.getImbtn78().setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Intent intent = new Intent(CRRecresultActivity.this, DirectReserveActivity.class);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putInt("number", list.get(position).getNumber());
+                                        bundle.putInt("class", 3);
+                                        bundle.putInt("time", list.get(position).getDate());
+                                        bundle.putInt("build", list.get(position).getBuilding());
+                                        intent.putExtras(bundle);
+                                        startActivity(intent);
+                                    }
+                                });
                             }
-                            if (cr.getState910() == ClassRoom.OCCUPIED) {
+                            if (cr.getState910() == ClassRoom.UNOCCUPIED) {
 
-                                vh.getImbtn910().setImageResource(R.color.main_5);
+                                vh.getImbtn910().setImageResource(R.color.main_4);
+                                vh.getImbtn910().setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Intent intent = new Intent(CRRecresultActivity.this, DirectReserveActivity.class);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putInt("number", list.get(position).getNumber());
+                                        bundle.putInt("class", 4);
+                                        bundle.putInt("time", list.get(position).getDate());
+                                        bundle.putInt("build", list.get(position).getBuilding());
+                                        intent.putExtras(bundle);
+                                        startActivity(intent);
+                                    }
+                                });
                             }
                         }
 
@@ -129,9 +249,7 @@ public class CRRecresultActivity extends AppCompatActivity {
 
             }
         });
-
     }
-
 
     class ViewHolder extends RecyclerView.ViewHolder {
 

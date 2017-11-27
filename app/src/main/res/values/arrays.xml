@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="build">
+        <item>无</item>
+        <item>正心楼</item>
+        <item>致知楼</item>
+        <item>诚意楼</item>
+    </string-array>
+</resources>
