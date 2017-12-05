@@ -286,6 +286,7 @@ public class CRQueryActivity extends AppCompatActivity {
                                 });
                             }else{
                                 vh.getImbtn12().setImageResource(R.color.main_5);
+                                vh.getImbtn12().setOnClickListener(null);
                             }
                             if (cr.getState34() == ClassRoom.UNOCCUPIED) {
 
@@ -305,6 +306,7 @@ public class CRQueryActivity extends AppCompatActivity {
                                 });
                             }else {
                                 vh.getImbtn34().setImageResource(R.color.main_5);
+                                vh.getImbtn34().setOnClickListener(null);
                             }
                             if (cr.getState56() == ClassRoom.UNOCCUPIED) {
 
@@ -324,6 +326,7 @@ public class CRQueryActivity extends AppCompatActivity {
                                 });
                             }else{
                                 vh.getImbtn56().setImageResource(R.color.main_5);
+                                vh.getImbtn56().setOnClickListener(null);
                             }
                             if (cr.getState78() == ClassRoom.UNOCCUPIED) {
 
@@ -344,6 +347,8 @@ public class CRQueryActivity extends AppCompatActivity {
                                 });
                             }else{
                                 vh.getImbtn78().setImageResource(R.color.main_5);
+                                vh.getImbtn78().setOnClickListener(null);
+
                             }
                             if (cr.getState910() == ClassRoom.UNOCCUPIED) {
 
@@ -363,6 +368,7 @@ public class CRQueryActivity extends AppCompatActivity {
                                 });
                             }else{
                                 vh.getImbtn910().setImageResource(R.color.main_5);
+                                vh.getImbtn910().setOnClickListener(null);
                             }
 
                         }
