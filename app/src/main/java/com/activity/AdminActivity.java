@@ -19,12 +19,14 @@ import com.example.user.crmapp.R;
 import com.model.Constant;
 import com.model.ReserveInfo;
 import com.util.PreferenceUtil;
+import com.util.ReserveInfoComparator;
 import com.util.ToastUtil;
 import com.util.db.MySQLiteHelper;
 import com.view.ActionBarView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import cn.bmob.v3.BmobBatch;
@@ -167,6 +169,7 @@ public class AdminActivity extends AppCompatActivity {
             public void done(List<ReserveInfo> list, BmobException e) {
 
                 if (e == null){
+                    Collections.sort(list,new ReserveInfoComparator());
                     infos = list;
                     adapter = new RecyclerView.Adapter() {
                         @Override

@@ -234,24 +234,30 @@ public class CheckReserveActivity extends AppCompatActivity {
                                             query1.findObjects(new FindListener<ReserveInfo>() {
                                                 @Override
                                                 public void done(List<ReserveInfo> list, BmobException e) {
-                                                    List<BmobObject> reserveinfos = new ArrayList<>();
+                                                   // List<BmobObject> reserveinfos = new ArrayList<>();
                                                     for (int i=0;i<list.size();i++){
 
-                                                        ReserveInfo reserveInfo = new ReserveInfo();
-                                                        reserveInfo.setObjectId(list.get(i).getObjectId());
+                                                        ReserveInfo reserveInfo = list.get(i);
                                                         if (!reserveInfo.getObjectId().equals(info.getObjectId())){
-                                                            reserveinfos.add(reserveInfo);
+                                                            reserveInfo.setState(Constant.STATE_REJECTED);
+                                                            reserveInfo.update(reserveInfo.getObjectId(), new UpdateListener() {
+                                                                @Override
+                                                                public void done(BmobException e) {
+
+                                                                }
+                                                            });
                                                         }
 
                                                     }
-                                                    new BmobBatch().deleteBatch(reserveinfos).doBatch(new QueryListListener<BatchResult>() {
-                                                        @Override
-                                                        public void done(List<BatchResult> list, BmobException e) {
-                                                            if (e == null){
-                                                                ToastUtil.showToast(CheckReserveActivity.this,"重复申请已删除");
-                                                            }
-                                                        }
-                                                    });
+//                                                    ToastUtil.showToast(CheckReserveActivity.this,"重复申请已自动拒绝");
+//                                                    new BmobBatch().deleteBatch(reserveinfos).doBatch(new QueryListListener<BatchResult>() {
+//                                                        @Override
+//                                                        public void done(List<BatchResult> list, BmobException e) {
+//                                                            if (e == null){
+//                                                                ToastUtil.showToast(CheckReserveActivity.this,"重复申请已删除");
+//                                                            }
+//                                                        }
+//                                                    });
                                                 }
                                             });
                                             info.setState(Constant.STATE_PASS);
@@ -261,7 +267,7 @@ public class CheckReserveActivity extends AppCompatActivity {
                                                     if (e == null) {
                                                         new AlertDialog.Builder(CheckReserveActivity.this)
                                                                 .setTitle("提醒")
-                                                                .setMessage("操作成功")
+                                                                .setMessage("操作成功,重复申请已自动拒绝")
                                                                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                                                     @Override
                                                                     public void onClick(DialogInterface dialogInterface, int i) {
