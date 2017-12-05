@@ -223,6 +223,7 @@ public class CRQueryActivity extends AppCompatActivity {
             @Override
             public void done(final List<ClassRoom> list, BmobException e) {
                 if (e == null) {
+                    dialog.dismiss();
                     Collections.sort(list, new NumberComparator());
                     rvCR.setAdapter(new RecyclerView.Adapter() {
 
@@ -283,6 +284,8 @@ public class CRQueryActivity extends AppCompatActivity {
                                         startActivity(intent);
                                     }
                                 });
+                            }else{
+                                vh.getImbtn12().setImageResource(R.color.main_5);
                             }
                             if (cr.getState34() == ClassRoom.UNOCCUPIED) {
 
@@ -300,6 +303,8 @@ public class CRQueryActivity extends AppCompatActivity {
                                         startActivity(intent);
                                     }
                                 });
+                            }else {
+                                vh.getImbtn34().setImageResource(R.color.main_5);
                             }
                             if (cr.getState56() == ClassRoom.UNOCCUPIED) {
 
@@ -317,6 +322,8 @@ public class CRQueryActivity extends AppCompatActivity {
                                         startActivity(intent);
                                     }
                                 });
+                            }else{
+                                vh.getImbtn56().setImageResource(R.color.main_5);
                             }
                             if (cr.getState78() == ClassRoom.UNOCCUPIED) {
 
@@ -335,6 +342,8 @@ public class CRQueryActivity extends AppCompatActivity {
                                         startActivity(intent);
                                     }
                                 });
+                            }else{
+                                vh.getImbtn78().setImageResource(R.color.main_5);
                             }
                             if (cr.getState910() == ClassRoom.UNOCCUPIED) {
 
@@ -352,10 +361,10 @@ public class CRQueryActivity extends AppCompatActivity {
                                         startActivity(intent);
                                     }
                                 });
+                            }else{
+                                vh.getImbtn910().setImageResource(R.color.main_5);
                             }
-                            if (position == list.size()-1){
-                                dialog.dismiss();
-                            }
+
                         }
 
                         @Override

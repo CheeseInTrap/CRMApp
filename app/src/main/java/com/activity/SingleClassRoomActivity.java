@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.example.user.crmapp.R;
 import com.model.ClassRoom;
+import com.model.Constant;
 import com.util.DateComparator;
 import com.util.ToastUtil;
 import com.view.ActionBarView;
@@ -86,6 +87,21 @@ public class SingleClassRoomActivity extends AppCompatActivity {
                     Collections.sort(list,new DateComparator());
                     ClassRoom classRoom = null;
                     classRoom = list.get(0);
+                    String building = "";
+                    switch (classRoom.getBuilding()){
+                        case Constant.BUILD_ZX:
+                            building = building+"正心";
+                            break;
+                        case Constant.BUILD_ZZ:
+                            building = building+"致知";
+                            break;
+                        case Constant.BUILD_CY:
+                            building = building+"诚意";
+                            break;
+
+                    }
+                    building =  building+" "+classRoom.getNumber();
+                    actionBarView.setTitle(building);
                     if (classRoom.getState12() == ClassRoom.UNOCCUPIED){
                         imbtn_12.setImageResource(R.color.main_4);
                     }

@@ -70,7 +70,7 @@ public class BaiduMapFragment extends BaseFragment implements SensorEventListene
         mapView = (MapView) view.findViewById(R.id.mapView);
         baiduMap = mapView.getMap();
 
-        mCurrentMode = MyLocationConfiguration.LocationMode.FOLLOWING;
+        mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
         baiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
                 mCurrentMode, true, mCurrentMarker));
         MapStatus.Builder builder = new MapStatus.Builder();

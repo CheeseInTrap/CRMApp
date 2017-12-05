@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/style_light"
+    android:orientation="vertical"
     tools:context="com.activity.CRRecommendActivity">
 
 
@@ -19,39 +19,50 @@
     <LinearLayout
         android:layout_width="300dp"
         android:layout_height="@dimen/linear_height"
-        android:background="@drawable/ll_bg"
-        android:gravity="center"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:background="@drawable/ll_bg"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="教学楼" />
+
         <Spinner
             android:id="@+id/sp"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:entries="@array/build"
-
-            >
-        </Spinner>
+            android:layout_weight="3"
+            android:entries="@array/build"></Spinner>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="20dp"/>
+        android:layout_height="20dp" />
+
     <LinearLayout
         android:layout_width="300dp"
         android:layout_height="@dimen/linear_height"
+        android:layout_marginLeft="20dp"
         android:background="@drawable/ll_bg"
         android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:layout_marginLeft="20dp">
+        android:orientation="horizontal">
+
         <TextView
-            android:text="教室楼层"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:text="教室楼层" />
+
         <View
             android:layout_width="10dp"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
+
         <EditText
             android:id="@+id/et_floor"
             android:layout_width="200dp"
@@ -64,50 +75,50 @@
 
 
     <View
-    android:layout_width="match_parent"
-    android:layout_height="20dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
 
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
+        android:layout_height="10dp" />
 
     <LinearLayout
         android:layout_width="300dp"
         android:layout_height="@dimen/linear_height"
-        android:orientation="horizontal"
-        android:layout_marginLeft="20dp">
+        android:layout_marginLeft="20dp"
+        android:orientation="horizontal">
+
         <TextView
-            android:text="教室规模"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical"/>
+            android:gravity="center_vertical"
+            android:text="教室规模" />
 
 
         <RadioGroup
-            android:gravity="center"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="2">
+            android:layout_weight="2"
+            android:gravity="center"
+            android:orientation="horizontal">
 
 
             <RadioButton
                 android:id="@+id/rb_small"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="小"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:text="小" />
 
             <RadioButton
                 android:id="@+id/rb_medium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="中"
-                android:layout_weight="1"/>
-
+                android:layout_weight="1"
+                android:text="中" />
 
 
             <RadioButton
@@ -115,7 +126,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="大"/>
+                android:text="大" />
 
 
         </RadioGroup>
@@ -126,7 +137,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
 
     <Button
@@ -136,10 +147,10 @@
         android:layout_gravity="center_horizontal"
         android:background="@drawable/btn"
         android:text="submit"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="50dp"/>
+        android:layout_height="50dp" />
 
 </LinearLayout>
